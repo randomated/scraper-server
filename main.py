@@ -69,11 +69,14 @@ scrape_list = {
   ]
 }
 
+will_hide = True
+
 # result = [texts, new_link, image_link, h1_text]
 for item in scrape_list["scrape_list"]:
   if item['type'] == "komeda":
-    scraper = KomedaScraper(failed_logger, success_logger, info_logger, True, False)
+    scraper = KomedaScraper(failed_logger, success_logger, info_logger, will_hide, False)
     result = scraper.start()
+    scraper.close()
     if result['is_success'] is True:
       summary_logger.log('KOMEDA SUCCESS')
 
@@ -86,8 +89,9 @@ for item in scrape_list["scrape_list"]:
       summary_logger.log('KOMEDA FAILED')
 
   elif item['type'] == "bio-c-bon":
-    scraper = BioCBonScraper(failed_logger, success_logger, info_logger, True, False)
+    scraper = BioCBonScraper(failed_logger, success_logger, info_logger, will_hide, False)
     result = scraper.start()
+    scraper.close()
     if result['is_success'] is True:
       summary_logger.log('BIO-C-BON SUCCESS')
 
@@ -100,8 +104,9 @@ for item in scrape_list["scrape_list"]:
       summary_logger.log('BIO-C-BON FAILED')
 
   elif item['type'] == "crisp":
-    scraper = CrispScraper(failed_logger, success_logger, info_logger, True, False)
+    scraper = CrispScraper(failed_logger, success_logger, info_logger, will_hide, False)
     result = scraper.start()
+    scraper.close()
     if result['is_success'] is True:
       summary_logger.log('CRISP SUCCESS')
 
@@ -114,8 +119,9 @@ for item in scrape_list["scrape_list"]:
       summary_logger.log('CRISP FAILED')
 
   elif item['type'] == "masterwal":
-    scraper = MasterwalScraper(failed_logger, success_logger, info_logger, True, False)
+    scraper = MasterwalScraper(failed_logger, success_logger, info_logger, will_hide, False)
     result = scraper.start()
+    scraper.close()
     if result['is_success'] is True:
       summary_logger.log('MASTERWAL SUCCESS')
 
@@ -128,8 +134,9 @@ for item in scrape_list["scrape_list"]:
       summary_logger.log('MASTERWAL FAILED')
 
   elif item['type'] == "in-sea":
-    scraper = InSeaScraper(failed_logger, success_logger, info_logger, True, False)
+    scraper = InSeaScraper(failed_logger, success_logger, info_logger, will_hide, False)
     result = scraper.start()
+    scraper.close()
     if result['is_success'] is True:
       summary_logger.log('IN-SEA SUCCESS')
 
@@ -142,8 +149,9 @@ for item in scrape_list["scrape_list"]:
       summary_logger.log('IN-SEA FAILED')
 
   elif item['type'] == "loft":
-    scraper = LoftScraper(failed_logger, success_logger, info_logger, True, False)
+    scraper = LoftScraper(failed_logger, success_logger, info_logger, will_hide, False)
     result = scraper.start()
+    scraper.close()
     if result['is_success'] is True:
       summary_logger.log('LOFT SUCCESS')
 
@@ -156,8 +164,9 @@ for item in scrape_list["scrape_list"]:
       summary_logger.log('LOFT FAILED')
 
   elif item['type'] == "the_melon":
-    scraper = TheMelonScraper(failed_logger, success_logger, info_logger, True, False)
+    scraper = TheMelonScraper(failed_logger, success_logger, info_logger, will_hide, False)
     result = scraper.start()
+    scraper.close()
     if result['is_success'] is True:
       summary_logger.log('THE-MELON SUCCESS')
 
