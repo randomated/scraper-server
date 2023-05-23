@@ -1,0 +1,6 @@
+.DS_Store
+nohup.out
+geckodriver.log
+logs/
+datas/
+**/__pycache__/
