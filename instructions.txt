@@ -1,3 +1,12 @@
+Execute this commands first:
+
 chmod +x deploy.sh
 
+
+To run server:
+
 ./deploy.sh
+
+To kill the server:
+
+pkill -f server.py
