@@ -33,7 +33,7 @@ class LoftScraper:
           options.add_argument('-no-sandbox')
           options.add_argument('-disable-dev-shm-usage')
 
-      self.driver = webdriver.Firefox(options=options, executable_path='./geckodriver')
+      self.driver = webdriver.Firefox(options=options)
 
   def start(self):
     self.logger_forall.log('STARTING LOFT')

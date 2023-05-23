@@ -1,7 +1,11 @@
 Execute this commands first:
 
+install firefox
+pip3 install -r requirements.txt
 chmod +x deploy.sh
 
+sudo cp /path/to/geckodriver /usr/local/bin
+sudo chmod +x /usr/local/bin/geckodriver
 
 To run server:
 
