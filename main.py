@@ -7,13 +7,16 @@ from scrapers.in_sea import InSeaScraper
 from scrapers.loft import LoftScraper
 from scrapers.the_melon import TheMelonScraper
 from database.saver import Saver
+import os
 
-info_logger = Logger('info')
-failed_logger = Logger('failed')
-success_logger = Logger('success')
-summary_logger = Logger('summary')
+current_directory = os.path.dirname(os.path.realpath(__file__))
 
-saver = Saver()
+info_logger = Logger('info', current_directory)
+failed_logger = Logger('failed', current_directory)
+success_logger = Logger('success', current_directory)
+summary_logger = Logger('summary', current_directory)
+
+saver = Saver(current_directory)
 
 scrape_list = { 
   "scrape_list": [
@@ -68,6 +71,7 @@ scrape_list = {
     }
   ]
 }
+
 
 will_hide = True
 

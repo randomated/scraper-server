@@ -6,11 +6,11 @@ class Saver:
   __conn = None
   __db_file = None
 
-  def __init__(self):
-    self.__db_file = f"datas/{datetime.now().strftime('%Y-%m-%d')}/scraped.sqlite"
+  def __init__(self, current_directory):
+    self.__db_file = f"{current_directory}/datas/{datetime.now().strftime('%Y-%m-%d')}/scraped.sqlite"
 
-    if not os.path.exists(f"datas/{datetime.now().strftime('%Y-%m-%d')}"):
-      os.makedirs(f"datas/{datetime.now().strftime('%Y-%m-%d')}")
+    if not os.path.exists(f"{current_directory}/datas/{datetime.now().strftime('%Y-%m-%d')}"):
+      os.makedirs(f"{current_directory}/datas/{datetime.now().strftime('%Y-%m-%d')}")
 
     if not os.path.exists(self.__db_file):
       self.__conn = sqlite3.connect(self.__db_file)
