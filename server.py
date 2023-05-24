@@ -1,7 +1,9 @@
 import json
 from flask import Flask, Response
 from database.saver import Saver
+import os
 
+current_directory = os.path.dirname(os.path.realpath(__file__))
 app = Flask(__name__)
 
 class CustomJSONEncoder(json.JSONEncoder):
@@ -12,7 +14,7 @@ class CustomJSONEncoder(json.JSONEncoder):
 
 @app.route('/')
 def index():
-  saver = Saver()
+  saver = Saver(current_directory)
   data = saver.fetch_datas()
 
   json_data = json.dumps(data, ensure_ascii=False, cls=CustomJSONEncoder)
