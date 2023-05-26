@@ -6,6 +6,7 @@ from scrapers.masterwal import MasterwalScraper
 from scrapers.in_sea import InSeaScraper
 from scrapers.loft import LoftScraper
 from scrapers.the_melon import TheMelonScraper
+from scrapers.flying_tiger import FlyingTigerScraper
 from database.saver import Saver
 import os
 
@@ -68,6 +69,12 @@ scrape_list = {
         {"store_name": "マインドフルネスサロン MELON 渋谷", "wls_id": 256},
       ],  
       "type": "the_melon"
+    },
+    {
+      "stores": [
+        {"store_name": "Flying Tiger Copenhagen表参道ストア", "wls_id": 221},
+      ],  
+      "type": "flying_tiger"
     }
   ]
 }
@@ -181,6 +188,22 @@ for item in scrape_list["scrape_list"]:
         saver.add_store(inserted_id, store['store_name'], store['wls_id'])
     else:
       summary_logger.log('THE-MELON FAILED')
+
+  elif item['type']  == "flying_tiger":
+    scraper = FlyingTigerScraper(failed_logger, success_logger, info_logger, will_hide, False)
+    result = scraper.start()
+    scraper.close()
+    if result['is_success'] is True:
+      summary_logger.log('FLYING-TIGER SUCCESS')
+
+      data = result['data']
+      inserted_id = saver.add_scraped_data(data['title'], data['description'], data['site_url'], data['images'])
+
+      for store in item["stores"]:
+        saver.add_store(inserted_id, store['store_name'], store['wls_id'])
+    else:
+      summary_logger.log('FLYING-TIGER FAILED')
+  
 
       
 saver.close_db()
