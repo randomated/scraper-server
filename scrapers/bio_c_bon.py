@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.remote.webelement import WebElement
 import time
 
 class BioCBonScraper:
@@ -78,7 +79,7 @@ class BioCBonScraper:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     h1_text = h1_tag.text
-    texts = text_tag.text.replace(f"{h1_text}\n", "")
+    texts = self.__extract_text(text_tag).strip().replace(f"{h1_text}\n", "")
     image_link = image_tag.get_attribute('src')
 
     images = []
@@ -102,6 +103,14 @@ class BioCBonScraper:
       except TimeoutException:
         self.logger_forall.log(f"Timed out waiting for element ({i + 1}/{max_tries}). (line {code_line})")
     raise TimeoutException(f"Element not found after {max_tries} tries. (line {code_line})")
+
+  def __extract_text(self, element: WebElement) -> str:
+    """Extracts the text from an element excluding <a> and <button> tags."""
+    text = element.get_attribute("textContent").strip()
+    inner_tags = element.find_elements(By.XPATH, ".//a | .//button")
+    for tag in inner_tags:
+      text = text.replace(tag.get_attribute("textContent").strip(), "")
+    return text
 
 class LinkCannotProcessException(Exception):
   pass
