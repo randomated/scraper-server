@@ -7,6 +7,7 @@ from scrapers.in_sea import InSeaScraper
 from scrapers.loft import LoftScraper
 from scrapers.the_melon import TheMelonScraper
 from scrapers.flying_tiger import FlyingTigerScraper
+from scrapers.hay_japan import HayJapanScraper
 from database.saver import Saver
 import os
 
@@ -75,6 +76,12 @@ scrape_list = {
         {"store_name": "Flying Tiger Copenhagen表参道ストア", "wls_id": 221},
       ],  
       "type": "flying_tiger"
+    },
+    {
+      "stores": [
+        {"store_name": "HAY TOKYO", "wls_id": 219},
+      ],  
+      "type": "hay_tokyo"
     }
   ]
 }
@@ -204,6 +211,20 @@ for item in scrape_list["scrape_list"]:
     else:
       summary_logger.log('FLYING-TIGER FAILED')
   
+  elif item['type']  == "hay_tokyo":
+    scraper = HayJapanScraper(failed_logger, success_logger, info_logger, will_hide, False)
+    result = scraper.start()
+    scraper.close()
+    if result['is_success'] is True:
+      summary_logger.log('HAY-JAPAN SUCCESS')
 
+      data = result['data']
+      inserted_id = saver.add_scraped_data(data['title'], data['description'], data['site_url'], data['images'])
+
+      for store in item["stores"]:
+        saver.add_store(inserted_id, store['store_name'], store['wls_id'])
+    else:
+      summary_logger.log('HAY-JAPAN FAILED')
+  
       
 saver.close_db()
