@@ -9,6 +9,9 @@ from scrapers.the_melon import TheMelonScraper
 from scrapers.flying_tiger import FlyingTigerScraper
 from scrapers.hay_japan import HayJapanScraper
 from scrapers.shiro_shiro import ShiroShiroScraper
+from scrapers.pokka import PokkaCreateScraper
+from scrapers.natural_lawson import NaturalLawsonScraper
+from scrapers.store_united_arrows import StoreUnitedArrowsScraper
 from database.saver import Saver
 import os
 
@@ -20,20 +23,6 @@ success_logger = Logger('success', current_directory)
 summary_logger = Logger('summary', current_directory)
 
 saver = Saver(current_directory)
-
-# Mapping between JSON types and classes
-class_mapping = {
-  "komeda": KomedaScraper,
-  "bio-c-bon": BioCBonScraper,
-  "crisp": CrispScraper,
-  "masterwal": MasterwalScraper,
-  "in-sea": InSeaScraper,
-  "loft": LoftScraper,
-  "the_melon": TheMelonScraper,
-  "flying_tiger": FlyingTigerScraper,
-  "hay_tokyo": HayJapanScraper,
-  "shiro": ShiroShiroScraper
-}
 
 scrape_list = { 
   "scrape_list": [
@@ -106,8 +95,128 @@ scrape_list = {
         {"store_name": "SHIRO 表参道本店", "wls_id": 275},
       ],  
       "type": "shiro"
+    },
+    {
+      "stores": [
+        {
+          "store_name": "カフェ・ド・クリエ グラン 恵比寿ガーデンプレイス店",
+          "wls_id": "607"
+        },
+        {
+          "store_name": "カフェ・ド・クリエ グラン　渋谷桜丘スクエア店",
+          "wls_id": "606"
+        },
+        {
+          "store_name": "カフェ・ド・クリエ 代々木東口店",
+          "wls_id": "605"
+        },
+        {
+          "store_name": "カフェ・ド・クリエ 南新宿店",
+          "wls_id": "604"
+        },
+        {
+          "store_name": "カフェ・ド・クリエ 渋谷3丁目店",
+          "wls_id": "603"
+        }
+      ],
+      "type": "pokkacreate"
+    },
+    {
+      "type": "natural_lawson",
+      "stores": [
+        {
+          "store_name": "ナチュラルローソン　渋谷神泉町",
+          "wls_id": "360"
+        },
+        {
+          "store_name": "ナチュラルローソン　恵比寿南三丁目",
+          "wls_id": "359"
+        },
+        {
+          "store_name": "ナチュラルローソン　渋谷道玄坂一丁目",
+          "wls_id": "358"
+        },
+        {
+          "store_name": "ナチュラルローソン　渋谷代官山",
+          "wls_id": "357"
+        },
+        {
+          "store_name": "ナチュラルローソン　代々木駅西",
+          "wls_id": "356"
+        },
+        {
+          "store_name": "ナチュラルローソン　渋谷一丁目",
+          "wls_id": "355"
+        },
+        {
+          "store_name": "ナチュラルローソン　神宮外苑西",
+          "wls_id": "354"
+        },
+        {
+          "store_name": "ナチュラルローソン　広尾五丁目",
+          "wls_id": "353"
+        },
+        {
+          "store_name": "ナチュラルローソン　代々木八幡",
+          "wls_id": "352"
+        }
+      ]
+    },
+    {
+      "type": "store_united_arrows",
+      "stores": [
+        {
+          "store_name": "ユナイテッドアローズ アトレ恵比寿 ウィメンズストア",
+          "wls_id": "190"
+        },
+        {
+          "store_name": "ユナイテッドアローズ 渋谷スクランブルスクエア店",
+          "wls_id": "189"
+        },
+        {
+          "store_name": "オデット エ オディール 渋谷シンクス店",
+          "wls_id": "188"
+        },
+        {
+          "store_name": "ユナイテッドアローズ 渋谷シンクス ウィメンズストア",
+          "wls_id": "187"
+        },
+        {
+          "store_name": "ロク 渋谷キャットストリート店 （ROKU SHIBUYA CAT STREET）",
+          "wls_id": "186"
+        },
+        {
+          "store_name": "UNITED ARROWS ディストリクト",
+          "wls_id": "185"
+        },
+        {
+          "store_name": "ユナイテッドアローズ＆サンズ （UNITED ARROWS & SONS）",
+          "wls_id": "184"
+        },
+        {
+          "store_name": "ユナイテッドアローズ 原宿本店",
+          "wls_id": "183"
+        }
+      ]
     }
   ]
+}
+
+# Mapping between JSON types and classes
+class_mapping = {
+  "komeda": KomedaScraper,
+  "bio-c-bon": BioCBonScraper,
+  "crisp": CrispScraper,
+  "masterwal": MasterwalScraper,
+  "in-sea": InSeaScraper,
+  "loft": LoftScraper,
+  "the_melon": TheMelonScraper,
+  "flying_tiger": FlyingTigerScraper,
+  "hay_tokyo": HayJapanScraper,
+  "shiro": ShiroShiroScraper,
+  "pokkacreate": PokkaCreateScraper,
+  "natural_lawson": NaturalLawsonScraper,
+  "store_united_arrows": StoreUnitedArrowsScraper
 }
 
 will_hide = True
