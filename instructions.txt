@@ -1,32 +1,23 @@
 Execute this commands first:
 
-sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev wget libbz2-dev
-
-wget https://www.python.org/ftp/python/3.11.3/Python-3.11.3.tgz
-tar -xf Python-3.11.3.tgz
-cd Python-3.11.3
-./configure --enable-optimizations
-make -j $(nproc)
-sudo make altinstall
-python3.x -m ensurepip --upgrade
-python3.x -V
-pip3.x --version
-
-
-install firefox:
 sudo apt update
-sudo apt install libgtk-3-0 libdbus-glib-1-2 xvfb
-wget -O firefox.tar.bz2 "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US"
-tar xvjf firefox.tar.bz2
-sudo mv firefox /opt/
-sudo ln -s /opt/firefox/firefox /usr/local/bin/firefox
-sudo apt install libgtk-3-0 libdbus-glib-1-2 libxt6 libx11-xcb1 libxrender1 libasound2
-
-pip3 install -r requirements.txt
-chmod +x deploy.sh
-
-sudo cp /path/to/geckodriver /usr/local/bin
+sudo apt upgrade
+sudo apt install python3 python3-pip
+sudo apt install firefox
+python3 --version
+pip3 --version
+firefox --version
+cd scraper-server/
+pip3 install -r requirements.txt 
+sudo cp ./geckodriver /usr/local/bin
 sudo chmod +x /usr/local/bin/geckodriver
+nohup python3 server.py &
+sudo timedatectl set-timezone Asia/Manila
+timedatectl
+crontab -e
+add crontab
+sudo systemctl restart cron
+chmod +x deploy.sh
 
 To run server:
 
