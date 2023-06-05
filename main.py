@@ -12,6 +12,7 @@ from scrapers.shiro_shiro import ShiroShiroScraper
 from scrapers.pokka import PokkaCreateScraper
 from scrapers.natural_lawson import NaturalLawsonScraper
 from scrapers.store_united_arrows import StoreUnitedArrowsScraper
+from scrapers.maccosmetics import MaccosmeticsScraper
 from database.saver import Saver
 import os
 
@@ -163,44 +164,67 @@ scrape_list = {
       ]
     },
     {
-      "type": "store_united_arrows",
+      "type": "maccosmetics",
       "stores": [
         {
-          "store_name": "ユナイテッドアローズ アトレ恵比寿 ウィメンズストア",
-          "wls_id": "190"
+          "store_name": "M∙A∙C Cosmetics Japanラフォーレ原宿",
+          "wls_id": "340"
         },
         {
-          "store_name": "ユナイテッドアローズ 渋谷スクランブルスクエア店",
-          "wls_id": "189"
+          "store_name": "M∙A∙C Cosmetics Japan 渋谷ヒカリエ シンクス",
+          "wls_id": "339"
         },
         {
-          "store_name": "オデット エ オディール 渋谷シンクス店",
-          "wls_id": "188"
+          "store_name": "M∙A∙C Cosmetics Japan 渋谷スクランブルスクエア",
+          "wls_id": "338"
         },
         {
-          "store_name": "ユナイテッドアローズ 渋谷シンクス ウィメンズストア",
-          "wls_id": "187"
-        },
-        {
-          "store_name": "ロク 渋谷キャットストリート店 （ROKU SHIBUYA CAT STREET）",
-          "wls_id": "186"
-        },
-        {
-          "store_name": "UNITED ARROWS ディストリクト",
-          "wls_id": "185"
-        },
-        {
-          "store_name": "ユナイテッドアローズ＆サンズ （UNITED ARROWS & SONS）",
-          "wls_id": "184"
-        },
-        {
-          "store_name": "ユナイテッドアローズ 原宿本店",
-          "wls_id": "183"
+          "store_name": "M∙A∙C Cosmetics Japan 西武渋谷",
+          "wls_id": "337"
         }
       ]
     }
   ]
 }
+
+# {
+#   "type": "store_united_arrows",
+#   "stores": [
+#     {
+#       "store_name": "ユナイテッドアローズ アトレ恵比寿 ウィメンズストア",
+#       "wls_id": "190"
+#     },
+#     {
+#       "store_name": "ユナイテッドアローズ 渋谷スクランブルスクエア店",
+#       "wls_id": "189"
+#     },
+#     {
+#       "store_name": "オデット エ オディール 渋谷シンクス店",
+#       "wls_id": "188"
+#     },
+#     {
+#       "store_name": "ユナイテッドアローズ 渋谷シンクス ウィメンズストア",
+#       "wls_id": "187"
+#     },
+#     {
+#       "store_name": "ロク 渋谷キャットストリート店 （ROKU SHIBUYA CAT STREET）",
+#       "wls_id": "186"
+#     },
+#     {
+#       "store_name": "UNITED ARROWS ディストリクト",
+#       "wls_id": "185"
+#     },
+#     {
+#       "store_name": "ユナイテッドアローズ＆サンズ （UNITED ARROWS & SONS）",
+#       "wls_id": "184"
+#     },
+#     {
+#       "store_name": "ユナイテッドアローズ 原宿本店",
+#       "wls_id": "183"
+#     }
+#   ]
+# }
+
 
 # Mapping between JSON types and classes
 class_mapping = {
@@ -216,7 +240,8 @@ class_mapping = {
   "shiro": ShiroShiroScraper,
   "pokkacreate": PokkaCreateScraper,
   "natural_lawson": NaturalLawsonScraper,
-  "store_united_arrows": StoreUnitedArrowsScraper
+  "store_united_arrows": StoreUnitedArrowsScraper,
+  "maccosmetics": MaccosmeticsScraper
 }
 
 will_hide = True
