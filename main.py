@@ -15,6 +15,7 @@ from scrapers.store_united_arrows import StoreUnitedArrowsScraper
 from scrapers.maccosmetics import MaccosmeticsScraper
 from scrapers.uniqlo import UniqloScraper
 from scrapers.threecosmetics import ThreecosmeticsScraper
+from scrapers.dulton import DultonScraper
 from database.saver import Saver
 import os
 
@@ -219,6 +220,19 @@ scrape_list = {
           "wls_id": "279"
         }
       ]
+    },
+    {
+      "type": "dulton",
+      "stores": [
+        {
+          "store_name": "ル・クルーゼ 渋谷ヒカリエ ShinQs店",
+          "wls_id": "406"
+        },
+        {
+          "store_name": "ル・クルーゼ 新宿タカシマヤ",
+          "wls_id": "407"
+        }
+      ]
     }
   ]
 }
@@ -279,9 +293,9 @@ class_mapping = {
   "store_united_arrows": StoreUnitedArrowsScraper,
   "maccosmetics": MaccosmeticsScraper,
   "uniqlo": UniqloScraper,
-  "threecosmetics": ThreecosmeticsScraper
+  "threecosmetics": ThreecosmeticsScraper,
+  "dulton": DultonScraper
 }
-
 
 will_hide = True
 
