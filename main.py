@@ -14,6 +14,7 @@ from scrapers.natural_lawson import NaturalLawsonScraper
 from scrapers.store_united_arrows import StoreUnitedArrowsScraper
 from scrapers.maccosmetics import MaccosmeticsScraper
 from scrapers.uniqlo import UniqloScraper
+from scrapers.threecosmetics import ThreecosmeticsScraper
 from database.saver import Saver
 import os
 
@@ -201,6 +202,23 @@ scrape_list = {
           "wls_id": "178"
         }
       ]
+    },
+    {
+      "type": "threecosmetics",
+      "stores": [
+        {
+          "store_name": "THREE 西武渋谷店",
+          "wls_id": "281"
+        },
+        {
+          "store_name": "THREE 渋谷ヒカリエ ShinQs店",
+          "wls_id": "280"
+        },
+        {
+          "store_name": "VISIONARIUM THREE SHIBUYA",
+          "wls_id": "279"
+        }
+      ]
     }
   ]
 }
@@ -260,8 +278,10 @@ class_mapping = {
   "natural_lawson": NaturalLawsonScraper,
   "store_united_arrows": StoreUnitedArrowsScraper,
   "maccosmetics": MaccosmeticsScraper,
-  "uniqlo": UniqloScraper
+  "uniqlo": UniqloScraper,
+  "threecosmetics": ThreecosmeticsScraper
 }
+
 
 will_hide = True
 
