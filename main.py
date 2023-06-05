@@ -13,6 +13,7 @@ from scrapers.pokka import PokkaCreateScraper
 from scrapers.natural_lawson import NaturalLawsonScraper
 from scrapers.store_united_arrows import StoreUnitedArrowsScraper
 from scrapers.maccosmetics import MaccosmeticsScraper
+from scrapers.uniqlo import UniqloScraper
 from database.saver import Saver
 import os
 
@@ -183,6 +184,23 @@ scrape_list = {
           "wls_id": "337"
         }
       ]
+    },
+    {
+      "type": "uniqlo",
+      "stores": [
+        {
+          "store_name": "ユニクロ 渋谷道玄坂店",
+          "wls_id": "180"
+        },
+        {
+          "store_name": "ユニクロ 新宿高島屋店",
+          "wls_id": "179"
+        },
+        {
+          "store_name": "ユニクロ 原宿店",
+          "wls_id": "178"
+        }
+      ]
     }
   ]
 }
@@ -241,7 +259,8 @@ class_mapping = {
   "pokkacreate": PokkaCreateScraper,
   "natural_lawson": NaturalLawsonScraper,
   "store_united_arrows": StoreUnitedArrowsScraper,
-  "maccosmetics": MaccosmeticsScraper
+  "maccosmetics": MaccosmeticsScraper,
+  "uniqlo": UniqloScraper
 }
 
 will_hide = True
