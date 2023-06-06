@@ -16,6 +16,26 @@ from scrapers.maccosmetics import MaccosmeticsScraper
 from scrapers.uniqlo import UniqloScraper
 from scrapers.threecosmetics import ThreecosmeticsScraper
 from scrapers.dulton import DultonScraper
+from scrapers.hands import HandsScraper
+from scrapers.withgreen import WithgreenScraper
+from scrapers.gu_global import GuGlobalScraper
+from scrapers.nergy import NergyScraper
+from scrapers.fighting_road import FightingRoadScraper
+from scrapers.mizuno import MizunoScraper
+from scrapers.two_foods import TwoFoodsScraper
+from scrapers.tokyu_hotels_cerulean_h import TokyuHotelsCeruleanHScraper
+from scrapers.legian import LegianScraper
+from scrapers.tokyu_hotels_stream_e import TokyuHotelsStreamEScraper
+from scrapers.weare_lush import WeareLushScraper
+from scrapers.yogiway import YogiwayScraper
+from scrapers.baycrews import BaycrewsScraper
+from scrapers.bruno_online_shop import BrunoOnlineShopScraper
+from scrapers.shibuya_san import ShibuyaSanScraper
+from scrapers.shoto_museum import ShotoMuseumScraper
+from scrapers.hikarie import HikarieScraper
+from scrapers.seria_group import SeriaGroupScraper
+from scrapers.akomeya import AkomeyaScraper
+from scrapers.gonpachi import GonpachiScraper
 from database.saver import Saver
 import os
 
@@ -489,7 +509,27 @@ class_mapping = {
   "maccosmetics": MaccosmeticsScraper,
   "uniqlo": UniqloScraper,
   "threecosmetics": ThreecosmeticsScraper,
-  "dulton": DultonScraper
+  "dulton": DultonScraper,
+  "hands": HandsScraper, 
+  "withgreen": WithgreenScraper, 
+  "gu_global": GuGlobalScraper, 
+  "nergy": NergyScraper, 
+  "fighting_road": FightingRoadScraper, 
+  "mizuno": MizunoScraper, 
+  "two_foods": TwoFoodsScraper, 
+  "tokyu_hotels_cerulean_h": TokyuHotelsCeruleanHScraper, 
+  "legian": LegianScraper, 
+  "tokyu_hotels_stream_e": TokyuHotelsStreamEScraper, 
+  "weare_lush": WeareLushScraper, 
+  "yogiway": YogiwayScraper, 
+  "baycrews": BaycrewsScraper, 
+  "bruno_online_shop": BrunoOnlineShopScraper, 
+  "shibuya_san": ShibuyaSanScraper, 
+  "shoto_museum": ShotoMuseumScraper, 
+  "hikarie": HikarieScraper, 
+  "seria_group": SeriaGroupScraper, 
+  "akomeya": AkomeyaScraper, 
+  "gonpachi": GonpachiScraper, 
 }
 
 will_hide = True
