@@ -233,6 +233,201 @@ scrape_list = {
           "wls_id": "407"
         }
       ]
+    },
+    {
+      "type": "hands",
+      "stores": [
+        {
+          "store_name": "ハンズ渋谷スクランブルスクエア店",
+          "wls_id": "206"
+        },
+        {
+          "store_name": "ハンズ渋谷店",
+          "wls_id": "205"
+        },
+        {
+          "store_name": "ハンズ新宿店",
+          "wls_id": "204"
+        }
+      ]
+    },
+    {
+      "type": "withgreen",
+      "stores": [
+        {
+          "store_name": "WithGreen恵比寿店",
+          "wls_id": "390"
+        },
+        {
+          "store_name": "WithGreen渋谷ヒカリエShinQs東横のれん街店",
+          "wls_id": "389"
+        }
+      ]
+    },
+    {
+      "type": "gu_global",
+      "stores": [
+        {
+          "store_name": "GU渋谷店",
+          "wls_id": "181"
+        }
+      ]
+    },
+    {
+      "type": "nergy",
+      "stores": [
+        {
+          "store_name": "nergy ATRE EBISU",
+          "wls_id": "165"
+        },
+        {
+          "store_name": "nergy SHIBUYA SCRAMBLE SQUARE",
+          "wls_id": "164"
+        }
+      ]
+    },
+    {
+      "type": "fighting_road",
+      "stores": [
+        {
+          "store_name": "FIGHTING ROAD東京店",
+          "wls_id": "196"
+        }
+      ]
+    },
+    {
+      "type": "mizuno",
+      "stores": [
+        {
+          "store_name": "MIZUNO TOKYO",
+          "wls_id": "197"
+        }
+      ]
+    },
+    {
+      "type": "two_foods",
+      "stores": [
+        {
+          "store_name": "2foods 渋⾕ロフト店",
+          "wls_id": "419"
+        }
+      ]
+    },
+    {
+      "type": "tokyu_hotels_cerulean_h",
+      "stores": [
+        {
+          "store_name": "ガーデンラウンジ「坐忘」",
+          "wls_id": "484"
+        }
+      ]
+    },
+    {
+      "type": "legian",
+      "stores": [
+        {
+          "store_name": "ザ・レギャン・トーキョー",
+          "wls_id": "486"
+        }
+      ]
+    },
+    {
+      "type": "tokyu_hotels_stream_e",
+      "stores": [
+        {
+          "store_name": "Dining TORRENT",
+          "wls_id": "491"
+        }
+      ]
+    },
+    {
+      "type": "weare_lush",
+      "stores": [
+        {
+          "store_name": "LUSH 原宿店",
+          "wls_id": "283"
+        },
+        {
+          "store_name": "LUSH 渋谷駅前店",
+          "wls_id": "282"
+        }
+      ]
+    },
+    {
+      "type": "yogiway",
+      "stores": [
+        {
+          "store_name": "ヨガスタジオ YOGIWAY",
+          "wls_id": "258"
+        }
+      ]
+    },
+    {
+      "type": "bruno_online_shop",
+      "stores": [
+        {
+          "store_name": "BRUNO 渋谷ヒカリエ ShinQs",
+          "wls_id": "401"
+        }
+      ]
+    },
+    {
+      "type": "shibuya_san",
+      "stores": [
+        {
+          "store_name": "Shibuya-san",
+          "wls_id": "646"
+        }
+      ]
+    },
+    {
+      "type": "shoto_museum",
+      "stores": [
+        {
+          "store_name": "渋谷区立松濤美術館",
+          "wls_id": "650"
+        }
+      ]
+    },
+    {
+      "type": "hikarie",
+      "stores": [
+        {
+          "store_name": "8/(ヒカリエ)",
+          "wls_id": "656"
+        }
+      ]
+    },
+    {
+      "type": "seria_group",
+      "stores": [
+        {
+          "store_name": "Seria代官山アドレス・ディセ店",
+          "wls_id": "223"
+        }
+      ]
+    },
+    {
+      "type": "akomeya",
+      "stores": [
+        {
+          "store_name": "AKOMEYA TOKYO 東急プラザ渋谷",
+          "wls_id": "218"
+        }
+      ]
+    },
+    {
+      "type": "gonpachi",
+      "stores": [
+        {
+          "store_name": "Sushi Gonpachi Shibuya",
+          "wls_id": "437"
+        },
+        {
+          "store_name": "Gonpachi Shibuya",
+          "wls_id": "436"
+        }
+      ]
     }
   ]
 }
