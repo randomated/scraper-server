@@ -309,10 +309,14 @@ for item in scrape_list["scrape_list"]:
     summary_logger.log(f"{item['type']} SUCCESS")
 
     data = result['data']
-    inserted_id = saver.add_scraped_data(data['title'], data['description'], data['site_url'], data['images'])
 
-    for store in item["stores"]:
-      saver.add_store(inserted_id, store['store_name'], store['wls_id'])
+    contains_data_image = any("data:image" in image_link for image_link in data['images'])
+
+    if not contains_data_image:
+      inserted_id = saver.add_scraped_data(data['title'], data['description'], data['site_url'], data['images'])
+
+      for store in item["stores"]:
+        saver.add_store(inserted_id, store['store_name'], store['wls_id'])
   else:
     summary_logger.log(f"{item['type']} FAILED")
 
