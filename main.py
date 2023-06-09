@@ -1,3 +1,4 @@
+from database.saver import Saver
 from scrapers.logger import Logger
 from scrapers.komeda import KomedaScraper
 from scrapers.bio_c_bon import BioCBonScraper
@@ -44,7 +45,13 @@ from scrapers.store_descente_descente import StoreDescenteDescenteScraper
 from scrapers.mugendai_yoshimoto import MugendaiYoshimotoScraper
 from scrapers.village_v import VillageVScraper
 from scrapers.store_descente_descente_golf import StoreDescenteDescenteGolfScraper
-from database.saver import Saver
+from scrapers.southerntower import SoutherntowerScraper
+from scrapers.solomons import SolomonsScraper
+from scrapers.tokyu_hotels_cerulean_h_restaurant_sakuragaoka import TokyuHotelsCeruleanHRestaurantSakuragaokaScraper
+from scrapers.ilfiume import IlfiumeScraper
+from scrapers.thaigarden import ThaigardenScraper
+from scrapers.tokyu_hotels_cerulean_h_restaurant_caramelo import TokyuHotelsCeruleanHRestaurantCarameloScraper
+from scrapers.towafood import TowafoodScraper
 import os
 
 current_directory = os.path.dirname(os.path.realpath(__file__))
@@ -548,6 +555,73 @@ scrape_list = {
           "wls_id": "195"
         }
       ]
+    },
+    {
+      "type": "tokyu_hotels_cerulean_h_restaurant_sakuragaoka",
+      "stores": [
+        {
+          "store_name": "日本料理「Japanese Cuisine 桜丘」",
+          "wls_id": "492"
+        }
+      ]
+    },
+    {
+      "type": "tokyu_hotels_cerulean_h_restaurant_caramelo",
+      "stores": [
+        {
+          "store_name": "ガーデンキッチン「かるめら」",
+          "wls_id": "422"
+        }
+      ]
+    },
+    {
+      "type": "thaigarden",
+      "stores": [
+        {
+          "store_name": "Thai Garden 渋谷",
+          "wls_id": "443"
+        }
+      ]
+    },
+    {
+      "type": "ilfiume",
+      "stores": [
+        {
+          "store_name": "イタリアンダイニング Il Fiume（イルフューメ）渋谷",
+          "wls_id": "489"
+        }
+      ]
+    },
+    {
+      "type": "solomons",
+      "stores": [
+        {
+          "store_name": "原宿Solomons（ソロモンズ）",
+          "wls_id": "498"
+        }
+      ]
+    },
+    {
+      "type": "southerntower",
+      "stores": [
+        {
+          "store_name": "ラウンジ サウスコート ｜Lounge South Court",
+          "wls_id": "499"
+        }
+      ]
+    },
+    {
+      "stores": [
+        {
+          "store_name": "椿屋カフェ フレンテ笹塚店",
+          "wls_id": "620"
+        },
+        {
+          "store_name": "椿屋カフェ 渋谷店",
+          "wls_id": "619"
+        }
+      ],
+      'type': 'towafood'
     }
   ]
 }
@@ -639,6 +713,13 @@ class_mapping = {
   "mugendai_yoshimoto": MugendaiYoshimotoScraper,
   "village_v": VillageVScraper,
   "store_descente_descente_golf": StoreDescenteDescenteGolfScraper,
+  "southerntower": SoutherntowerScraper,
+  "solomons": SolomonsScraper,
+  "tokyu_hotels_cerulean_h_restaurant_sakuragaoka": TokyuHotelsCeruleanHRestaurantSakuragaokaScraper,
+  "ilfiume": IlfiumeScraper,
+  "thaigarden": ThaigardenScraper,
+  "tokyu_hotels_cerulean_h_restaurant_caramelo": TokyuHotelsCeruleanHRestaurantCarameloScraper,
+  "towafood": TowafoodScraper
 }
 
 will_hide = True
