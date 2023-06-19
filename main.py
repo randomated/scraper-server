@@ -434,15 +434,6 @@ scrape_list = {
       ]
     },
     {
-      "type": "seria_group",
-      "stores": [
-        {
-          "store_name": "Seria代官山アドレス・ディセ店",
-          "wls_id": "223"
-        }
-      ]
-    },
-    {
       "type": "akomeya",
       "stores": [
         {
@@ -626,6 +617,16 @@ scrape_list = {
   ]
 }
 
+
+# {
+#   "type": "seria_group",
+#   "stores": [
+#     {
+#       "store_name": "Seria代官山アドレス・ディセ店",
+#       "wls_id": "223"
+#     }
+#   ]
+# },
 # {
 #   "type": "store_united_arrows",
 #   "stores": [
