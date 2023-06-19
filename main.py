@@ -726,7 +726,7 @@ will_hide = True
 
 for item in scrape_list["scrape_list"]:
   cls = class_mapping[item['type']]
-  scraper = cls(failed_logger, success_logger, info_logger, will_hide, False)
+  scraper = cls(failed_logger, success_logger, info_logger, will_hide, True)
   result = scraper.start()
   scraper.close()
   
