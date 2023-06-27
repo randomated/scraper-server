@@ -52,6 +52,12 @@ from scrapers.ilfiume import IlfiumeScraper
 from scrapers.thaigarden import ThaigardenScraper
 from scrapers.tokyu_hotels_cerulean_h_restaurant_caramelo import TokyuHotelsCeruleanHRestaurantCarameloScraper
 from scrapers.towafood import TowafoodScraper
+from scrapers.doutor import DoutorScraper
+from scrapers.phiten import PhitenScraper
+from scrapers.ebisu_fukuwarai import EbisuFukuwaraiScraper
+from scrapers.reset_gym import ResetGymScraper
+from scrapers.spanish_lounge import SpanishLoungeScraper
+from scrapers.gaia_ochanomizu import GaiaScraper
 import os
 
 current_directory = os.path.dirname(os.path.realpath(__file__))
@@ -613,7 +619,71 @@ scrape_list = {
         }
       ],
       'type': 'towafood'
-    }
+    },
+    {
+      "stores": [
+        {
+          "store_name": "エクセルシオール カフェ 渋谷宮益坂店",
+          "wls_id": "597"
+        }
+      ],
+      'type': 'doutor'
+    },
+    {
+      "stores": [
+        {
+          "store_name": "ファイテンショップ 渋谷東口店",
+          "wls_id": "199"
+        }
+      ],
+      'type': 'phiten'
+    },
+    {
+      "stores": [
+        {
+          "store_name": "福笑（ふくわらい）",
+          "wls_id": "366"
+        }
+      ],
+      'type': 'ebisu_fukuwarai'
+    },
+    {
+      "stores": [
+        {
+          "store_name": "プロテインバーRESET",
+          "wls_id": "478"
+        }
+      ],
+      'type': 'reset_gym'
+    },
+    {
+      "stores": [
+        {
+          "store_name": "spanish lounge parador パラドール",
+          "wls_id": "495"
+        }
+      ],
+      'type': 'spanish_lounge'
+    },
+    {
+      "stores": [
+        {
+          "store_name": "GAIA 代々木上原店",
+          "wls_id": "384"
+        }
+      ],
+      'type': 'gaia_ochanomizu'
+    },
+    {
+      "stores": [
+        {
+          "store_name": "JOURNAL STANDARD FURNITURE 渋谷店",
+          "wls_id": "395"
+        }
+      ],
+      'type': 'baycrews'
+    },
+
   ]
 }
 
@@ -720,7 +790,14 @@ class_mapping = {
   "ilfiume": IlfiumeScraper,
   "thaigarden": ThaigardenScraper,
   "tokyu_hotels_cerulean_h_restaurant_caramelo": TokyuHotelsCeruleanHRestaurantCarameloScraper,
-  "towafood": TowafoodScraper
+  "towafood": TowafoodScraper,
+  "doutor": DoutorScraper,
+  "phiten": PhitenScraper,
+  "ebisu_fukuwarai": EbisuFukuwaraiScraper,
+  "reset_gym": ResetGymScraper,
+  "spanish_lounge": SpanishLoungeScraper,
+  "gaia_ochanomizu": GaiaScraper
+
 }
 
 will_hide = True
