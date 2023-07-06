@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.remote.webelement import WebElement
 import time
+# from logger import Logger
 
 class BioCBonScraper:
   def __init__(self, logger_exc, logger_nonexc, logger_forall, is_headless=True, is_chrome=True):
@@ -55,37 +56,28 @@ class BioCBonScraper:
 
   def __process(self):
     try:
-      link_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="main_articlelist"]/div/ul/li[1]/div/a', None, 10, 5, "a tag")
+      link_tag = self.__find_element(self.driver, By.XPATH, './/*[@id="topics_container"]/li[1]/a', None, 10, 5, "a tag")
+    except TimeoutException as e:
+      raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
+
+    try:
+      image_tag = self.__find_element(self.driver, By.XPATH, './/*[@id="topics_container"]/li[1]/a/div[1]/img', None, 10, 5, "image tag")
+    except TimeoutException as e:
+      raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
+
+    try:
+      text_tag = self.__find_element(self.driver, By.XPATH, './/*[@id="topics_container"]/li[1]/a/div[2]/p', None, 10, 5, "text tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     new_link = link_tag.get_attribute('href')
-    self.driver.get(new_link)
-
-    try:
-      time.sleep(5)
-      h1_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="category_html"]/h2', None, 10, 5, "h2 tag")
-    except TimeoutException as e:
-      raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
-
-    try:
-      image_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="category_html"]/div/div/img', None, 10, 5, "image tag")
-    except TimeoutException as e:
-      raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
-
-    try:
-      text_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="category_html"]', None, 10, 5, "text tag")
-    except TimeoutException as e:
-      raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
-
-    h1_text = h1_tag.text
-    texts = self.__extract_text(text_tag).strip().replace(f"{h1_text}\n", "")
+    texts = self.__extract_text(text_tag).strip()
     image_link = image_tag.get_attribute('src')
 
     images = []
     images.append(image_link)
     
-    return { "description": texts, "site_url": new_link, "images": images, "title": h1_text }
+    return { "description": texts, "site_url": new_link, "images": images, "title": "TOPICS" }
 
   def __find_element(self, driver, locator_type, locator, parent_element=None, timeout=10, max_tries=5, code_line=""):
     for i in range(max_tries):
@@ -116,9 +108,10 @@ class LinkCannotProcessException(Exception):
   pass
 
 # if __name__ == '__main__':
-#   info_logger = Logger('info')
-#   failed_logger = Logger('failed')
-#   success_logger = Logger('success')
+#   current_directory = "/Users/argiebacomo/Desktop/python_stuffs/scraper-server"
+#   info_logger = Logger('info', current_directory)
+#   failed_logger = Logger('failed', current_directory)
+#   success_logger = Logger('success', current_directory)
 
 #   scraper = BioCBonScraper(failed_logger, success_logger, info_logger, False, False)
 #   print(scraper.start())

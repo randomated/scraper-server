@@ -80,6 +80,7 @@ class CrispScraper:
 
     h1_text = h1_tag.text
     texts = self.__extract_text(text_tag).strip()
+    texts = texts[:105].strip() + "..." if len(texts) > 105 else texts
     image_link = image_tag.get_attribute('src')
 
     images = []

@@ -40,7 +40,7 @@ class WithgreenScraper:
   def start(self):
     self.logger_forall.log('STARTING Withgreen')
     try:
-      self.driver.get("https://withgreen.club/")
+      self.driver.get("https://withgreen.club/category/blog/item/")
       array_result = self.__process()
     except LinkCannotProcessException as e:
       self.logger_forall.log(f"FAILED Caught an exception: {e}")
@@ -57,17 +57,17 @@ class WithgreenScraper:
   def __process(self):
     time.sleep(10)
     try:
-      link_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="newsSlider"]/div[1]/article[1]/a', None, 10, 5, "a tag")
+      link_tag = self.__find_element(self.driver, By.XPATH, './/main/div/article[1]/a', None, 10, 5, "a tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      image_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="newsSlider"]/div[1]/article[1]/figure/img', None, 10, 5, "image tag")
+      image_tag = self.__find_element(self.driver, By.XPATH, './/main/div/article[1]/figure/img', None, 10, 5, "image tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      text_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="newsSlider"]/div[1]/article[1]/h3', None, 10, 5, "text tag")
+      text_tag = self.__find_element(self.driver, By.XPATH, './/main/div/article[1]/h3', None, 10, 5, "text tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 

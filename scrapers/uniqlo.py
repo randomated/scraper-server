@@ -57,29 +57,28 @@ class UniqloScraper:
   def __process(self):
     time.sleep(10)
     try:
-      link_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="root"]/div[7]/div/div[1]/a[1]', None, 10, 5, "a tag")
+      link_tag = self.__find_element(self.driver, By.XPATH, './/*[@id="root"]/div[9]/div/div[1]/a', None, 10, 5, "a tag")
+    except TimeoutException as e:
+      raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
+
+    try:
+      image_tag = self.__find_element(self.driver, By.XPATH, './/*[@id="root"]/div[9]/div/div[1]/a/div/div[1]/div/img', None, 10, 5, "image tag")
+    except TimeoutException as e:
+      raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
+
+    try:
+      text_tag = self.__find_element(self.driver, By.XPATH, './/*[@id="root"]/div[9]/div/div[1]/a/div/div[2]', None, 10, 5, "text tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     new_link = link_tag.get_attribute('href')
-
-    try:
-      image_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="root"]/div[7]/div/div[1]/a[1]/div/div[1]/div/img', None, 10, 5, "image tag")
-    except TimeoutException as e:
-      raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
-
-    try:
-      text_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="root"]/div[7]/div/div[1]/a[1]/div/div[2]', None, 10, 5, "text tag")
-    except TimeoutException as e:
-      raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
-
     texts = self.__extract_text(text_tag).strip()
     image_link = image_tag.get_attribute('src')
 
     images = []
     images.append(image_link)
     
-    return { "description": texts, "site_url": new_link, "images": images, "title": "注目の情報" }
+    return { "description": texts, "site_url": new_link, "images": images, "title": "新作商品" }
 
   def __find_element(self, driver, locator_type, locator, parent_element=None, timeout=10, max_tries=5, code_line=""):
     for i in range(max_tries):
