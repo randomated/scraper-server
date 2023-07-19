@@ -40,7 +40,7 @@ class BrunoOnlineShopScraper:
   def start(self):
     self.logger_forall.log('STARTING BrunoOnlineShop')
     try:
-      self.driver.get("https://bruno-onlineshop.com/")
+      self.driver.get("https://bruno-onlineshop.com/BRUNO/")
       array_result = self.__process()
     except LinkCannotProcessException as e:
       self.logger_forall.log(f"FAILED Caught an exception: {e}")
@@ -62,12 +62,13 @@ class BrunoOnlineShopScraper:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      image_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="main"]/div[3]/section[1]/ul/li[1]/a/img', None, 10, 5, "image tag")
+      
+      image_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="main"]/div/section[1]/div/ul/li[1]/a/img', None, 10, 5, "image tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      text_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="main"]/div[3]/section[1]/ul/li[1]/a/p[2]', None, 10, 5, "text tag")
+      text_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="main"]/div/section[1]/div/ul/li[1]/a/p[2]', None, 10, 5, "text tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
@@ -78,7 +79,7 @@ class BrunoOnlineShopScraper:
     images = []
     images.append(image_link)
     
-    return { "description": texts, "site_url": new_link, "images": images, "title": "Feature" }
+    return { "description": texts, "site_url": new_link, "images": images, "title": "FEATURE おすすめ特集" }
 
   def __find_element(self, driver, locator_type, locator, parent_element=None, timeout=10, max_tries=5, code_line=""):
     for i in range(max_tries):

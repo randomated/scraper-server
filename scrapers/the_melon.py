@@ -62,24 +62,24 @@ class TheMelonScraper:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     new_link = link_tag.get_attribute('href')
-    self.driver.get(new_link)
+    # self.driver.get(new_link)
+
+    # try:
+    #   time.sleep(5)
+    #   h1_tag = self.__find_element(self.driver, By.XPATH, '/html/body/main/article/header/h1', None, 10, 5, "h2 tag")
+    #   h1_text = h1_tag.text
+    # except TimeoutException as e:
+    #   raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      time.sleep(5)
-      h1_tag = self.__find_element(self.driver, By.XPATH, '/html/body/main/article/header/h1', None, 10, 5, "h2 tag")
-      h1_text = h1_tag.text
-    except TimeoutException as e:
-      raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
-
-    try:
-      image_tag = self.__find_element(self.driver, By.XPATH, '/html/body/main/article/header/img', None, 10, 5, "image tag")
+      image_tag = self.__find_element(self.driver, By.XPATH, '/html/body/main/ul/li[1]/a/div[1]/img', None, 10, 5, "image tag")
       image_link = image_tag.get_attribute('src')
       images.append(image_link)
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      text_tag = self.__find_element(self.driver, By.XPATH, '/html/body/main/article/section', None, 10, 5, "text tag")
+      text_tag = self.__find_element(self.driver, By.XPATH, '/html/body/main/ul/li[1]/a/div[2]/h3', None, 10, 5, "text tag")
       texts = self.__extract_text(text_tag).strip()
       img_elements = text_tag.find_elements(By.XPATH, ".//img")
 
@@ -89,7 +89,7 @@ class TheMelonScraper:
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
     
-    return { "description": texts, "site_url": new_link, "images": images, "title": h1_text }
+    return { "description": texts, "site_url": new_link, "images": images, "title": "INFORMATION" }
 
 
   def __find_element(self, driver, locator_type, locator, parent_element=None, timeout=10, max_tries=5, code_line=""):

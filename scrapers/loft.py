@@ -60,32 +60,32 @@ class LoftScraper:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     new_link = link_tag.get_attribute('href')
-    self.driver.get(new_link)
+    # self.driver.get(new_link)
+
+    # try:
+    #   time.sleep(5)
+    #   h1_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="wapper-innercontents"]/div/div[1]/div[1]/div', None, 10, 5, "h2 tag")
+    # except TimeoutException as e:
+    #   raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      time.sleep(5)
-      h1_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="wapper-innercontents"]/div/div[1]/div[1]/div', None, 10, 5, "h2 tag")
+      image_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="content-box"]/div/ul/li[1]/a/div/p/img', None, 10, 5, "image tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      image_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="wapper-innercontents"]/div/div[1]/figure/img', None, 10, 5, "image tag")
+      text_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="content-box"]/div/ul/li[1]/a/div/div/p[1]', None, 10, 5, "text tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
-    try:
-      text_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="content-box"]/div', None, 10, 5, "text tag")
-    except TimeoutException as e:
-      raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
-
-    h1_text = h1_tag.text
+    # h1_text = h1_tag.text
     texts = self.__extract_text(text_tag).strip()
     image_link = image_tag.get_attribute('src')
 
     images = []
     images.append(image_link)
     
-    return { "description": texts, "site_url": new_link, "images": images, "title": h1_text }
+    return { "description": texts, "site_url": new_link, "images": images, "title": "ニュース　NEWS" }
 
   def __find_element(self, driver, locator_type, locator, parent_element=None, timeout=10, max_tries=5, code_line=""):
     for i in range(max_tries):

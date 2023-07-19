@@ -62,7 +62,8 @@ class TokyuHotelsCeruleanHRestaurantSakuragaokaScraper:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      h1_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="main-content"]/section/div[6]/div[1]/div/div/div/div/div[2]/p/strong', None, 10, 5, "h2 tag")
+      h1_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="main-content"]/section/div[6]/div[1]/div/div/div/div/div[1]/div/div[2]/div/div/div/h2', None, 10, 5, "h2 tag")
+      # h1_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="main-content"]/section/div[6]/div[1]/div/div/div/div/div[2]/p/strong', None, 10, 5, "h2 tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 

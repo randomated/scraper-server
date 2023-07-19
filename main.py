@@ -58,6 +58,8 @@ from scrapers.ebisu_fukuwarai import EbisuFukuwaraiScraper
 from scrapers.reset_gym import ResetGymScraper
 from scrapers.spanish_lounge import SpanishLoungeScraper
 from scrapers.gaia_ochanomizu import GaiaScraper
+from scrapers.starbucks import StarbucksScraper
+from scrapers.goldwin import GoldwinScraper
 import os
 
 current_directory = os.path.dirname(os.path.realpath(__file__))
@@ -311,19 +313,6 @@ scrape_list = {
         {
           "store_name": "GU渋谷店",
           "wls_id": "181"
-        }
-      ]
-    },
-    {
-      "type": "nergy",
-      "stores": [
-        {
-          "store_name": "nergy ATRE EBISU",
-          "wls_id": "165"
-        },
-        {
-          "store_name": "nergy SHIBUYA SCRAMBLE SQUARE",
-          "wls_id": "164"
         }
       ]
     },
@@ -610,19 +599,6 @@ scrape_list = {
     {
       "stores": [
         {
-          "store_name": "椿屋カフェ フレンテ笹塚店",
-          "wls_id": "620"
-        },
-        {
-          "store_name": "椿屋カフェ 渋谷店",
-          "wls_id": "619"
-        }
-      ],
-      'type': 'towafood'
-    },
-    {
-      "stores": [
-        {
           "store_name": "エクセルシオール カフェ 渋谷宮益坂店",
           "wls_id": "597"
         }
@@ -683,7 +659,180 @@ scrape_list = {
       ],
       'type': 'baycrews'
     },
-
+    {
+      "stores": [
+        {
+          "store_name": "スターバックス京王笹塚店",
+          "wls_id": "545"
+        },
+        {
+          "store_name": "スターバックスアコルデ代々木上原店",
+          "wls_id": "544"
+        },
+        {
+          "store_name": "スターバックス代々木店",
+          "wls_id": "543"
+        },
+        {
+          "store_name": "スターバックス新宿南口店",
+          "wls_id": "542"
+        },
+        {
+          "store_name": "スターバックス新宿サザンテラス店",
+          "wls_id": "541"
+        },
+        {
+          "store_name": "スターバックス新宿マインズタワー店",
+          "wls_id": "540"
+        },
+        {
+          "store_name": "スターバックス北参道店",
+          "wls_id": "539"
+        },
+        {
+          "store_name": "スターバックスリンクスクエア新宿店",
+          "wls_id": "538"
+        },
+        {
+          "store_name": "スターバックス渋谷ヒカリエ ShinQs店",
+          "wls_id": "537"
+        },
+        {
+          "store_name": "スターバックス渋谷パルコ店",
+          "wls_id": "536"
+        },
+        {
+          "store_name": "スターバックスTSUTAYA BOOKSTORE 渋谷スクランブルスクエア店",
+          "wls_id": "535"
+        },
+        {
+          "store_name": "スターバックス恵比寿ガーデンプレイスタワー１F店",
+          "wls_id": "534"
+        },
+        {
+          "store_name": "スターバックス渋谷文化村通り店",
+          "wls_id": "533"
+        },
+        {
+          "store_name": "スターバックス渋谷フクラス店",
+          "wls_id": "532"
+        },
+        {
+          "store_name": "スターバックス渋谷マークシティ店",
+          "wls_id": "531"
+        },
+        {
+          "store_name": "スターバックスSHIBUYA TSUTAYA店",
+          "wls_id": "530"
+        },
+        {
+          "store_name": "スターバックス渋谷ファイヤー通り店",
+          "wls_id": "529"
+        },
+        {
+          "store_name": "スターバックス渋谷モディ店",
+          "wls_id": "528"
+        },
+        {
+          "store_name": "スターバックス渋谷公園通り店",
+          "wls_id": "527"
+        },
+        {
+          "store_name": "スターバックスプリンチ 代官山T-SITE",
+          "wls_id": "526"
+        },
+        {
+          "store_name": "スターバックス代官山 蔦屋書店",
+          "wls_id": "525"
+        },
+        {
+          "store_name": "スターバックスアトレ恵比寿店(2F)",
+          "wls_id": "524"
+        },
+        {
+          "store_name": "スターバックスアトレ恵比寿店(5F)",
+          "wls_id": "523"
+        },
+        {
+          "store_name": "スターバックス恵比寿ユニオンビル店",
+          "wls_id": "522"
+        },
+        {
+          "store_name": "スターバックス恵比寿ガーデンプレイス センタープラザB1店",
+          "wls_id": "521"
+        },
+        {
+          "store_name": "スターバックス恵比寿ファーストスクエア店",
+          "wls_id": "520"
+        },
+        {
+          "store_name": "スターバックス広尾店",
+          "wls_id": "519"
+        },
+        {
+          "store_name": "スターバックス渋谷クロスタワー店",
+          "wls_id": "518"
+        },
+        {
+          "store_name": "スターバックス渋谷３丁目店",
+          "wls_id": "517"
+        },
+        {
+          "store_name": "スターバックス渋谷cocoti店",
+          "wls_id": "516"
+        },
+        {
+          "store_name": "スターバックス渋谷ストリーム店",
+          "wls_id": "515"
+        },
+        {
+          "store_name": "スターバックス渋谷2丁目店",
+          "wls_id": "514"
+        },
+        {
+          "store_name": "スターバックス神宮前6丁目店",
+          "wls_id": "513"
+        },
+        {
+          "store_name": "スターバックス明治神宮前メトロピア店",
+          "wls_id": "512"
+        },
+        {
+          "store_name": "スターバックスMIYASHITA PARK店",
+          "wls_id": "511"
+        },
+        {
+          "store_name": "スターバックスWITH HARAJUKU店",
+          "wls_id": "510"
+        },
+        {
+          "store_name": "スターバックス表参道ヒルズ店",
+          "wls_id": "509"
+        },
+        {
+          "store_name": "スターバックス東急プラザ 表参道原宿店",
+          "wls_id": "508"
+        },
+        {
+          "store_name": "スターバックス表参道 神宮前4丁目店",
+          "wls_id": "507"
+        }
+      ],
+      'type': 'starbucks'
+    },
+    {
+      'type': 'goldwin',
+      'stores': [
+        {
+          "store_name": "THE NORTHFACE CAMP/PLAY EARTH KIDS/NEUTRALWORKS.恵比",
+          "wls_id": "159"
+        },
+        {
+          "store_name": "THE NORTH FACE/DANSKIN beautiful things ヒカリエShinQs",
+          "wls_id": "160"
+        }
+      ]
+    }
   ]
 }
 
@@ -733,7 +882,33 @@ scrape_list = {
 #       "wls_id": "183"
 #     }
 #   ]
-# }
+# },
+# {
+#   "type": "nergy",
+#   "stores": [
+#     {
+#       "store_name": "nergy ATRE EBISU",
+#       "wls_id": "165"
+#     },
+#     {
+#       "store_name": "nergy SHIBUYA SCRAMBLE SQUARE",
+#       "wls_id": "164"
+#     }
+#   ]
+# },
+# {
+#   "stores": [
+#     {
+#       "store_name": "椿屋カフェ フレンテ笹塚店",
+#       "wls_id": "620"
+#     },
+#     {
+#       "store_name": "椿屋カフェ 渋谷店",
+#       "wls_id": "619"
+#     }
+#   ],
+#   'type': 'towafood'
+# },
 
 
 
@@ -796,8 +971,9 @@ class_mapping = {
   "ebisu_fukuwarai": EbisuFukuwaraiScraper,
   "reset_gym": ResetGymScraper,
   "spanish_lounge": SpanishLoungeScraper,
-  "gaia_ochanomizu": GaiaScraper
-
+  "gaia_ochanomizu": GaiaScraper,
+  "starbucks": StarbucksScraper,
+  "goldwin": GoldwinScraper
 }
 
 will_hide = True
