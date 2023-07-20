@@ -60,6 +60,7 @@ from scrapers.spanish_lounge import SpanishLoungeScraper
 from scrapers.gaia_ochanomizu import GaiaScraper
 from scrapers.starbucks import StarbucksScraper
 from scrapers.goldwin import GoldwinScraper
+from scrapers.mysweets import MySweetsScraper
 import os
 
 current_directory = os.path.dirname(os.path.realpath(__file__))
@@ -521,6 +522,14 @@ scrape_list = {
         {
           "store_name": "よしもと∞ホール",
           "wls_id": "644"
+        },
+        {
+          "store_name": "吉本∞ホール",
+          "wls_id": "685"
+        },
+        {
+          "store_name": "サンプルストア",
+          "wls_id": "684"
         }
       ]
     },
@@ -832,6 +841,15 @@ scrape_list = {
           "wls_id": "160"
         }
       ]
+    },
+    {
+      'type': 'mysweets',
+      'stores': [
+        {
+          "store_name": "サンプルストア",
+          "wls_id": "688"
+        }
+      ]
     }
   ]
 }
@@ -973,14 +991,16 @@ class_mapping = {
   "spanish_lounge": SpanishLoungeScraper,
   "gaia_ochanomizu": GaiaScraper,
   "starbucks": StarbucksScraper,
-  "goldwin": GoldwinScraper
+  "goldwin": GoldwinScraper,
+  "mysweets": MySweetsScraper
 }
 
 will_hide = True
+is_chrome = True
 
 for item in scrape_list["scrape_list"]:
   cls = class_mapping[item['type']]
-  scraper = cls(failed_logger, success_logger, info_logger, will_hide, True)
+  scraper = cls(failed_logger, success_logger, info_logger, will_hide, is_chrome)
   result = scraper.start()
   scraper.close()
   
@@ -989,13 +1009,22 @@ for item in scrape_list["scrape_list"]:
 
     data = result['data']
 
-    contains_data_image = any("data:image" in image_link for image_link in data['images'])
+    if item['type'] != 'mysweets':
+      contains_data_image = any("data:image" in image_link for image_link in data['images'])
 
-    if not contains_data_image:
-      inserted_id = saver.add_scraped_data(data['title'], data['description'], data['site_url'], data['images'])
+      if not contains_data_image:
+        inserted_id = saver.add_scraped_data(data['title'], data['description'], data['site_url'], data['images'])
 
-      for store in item["stores"]:
-        saver.add_store(inserted_id, store['store_name'], store['wls_id'])
+        for store in item["stores"]:
+          saver.add_store(inserted_id, store['store_name'], store['wls_id'])
+    else:
+      for res in data:
+        contains_data_image = any("data:image" in image_link for image_link in res['images'])
+        if not contains_data_image:
+          inserted_id = saver.add_scraped_data(res['title'], res['description'], res['site_url'], res['images'])
+
+          for store in item["stores"]:
+            saver.add_store(inserted_id, store['store_name'], store['wls_id'])
   else:
     summary_logger.log(f"{item['type']} FAILED")
 

@@ -9,7 +9,7 @@ from selenium.webdriver.remote.webelement import WebElement
 import time
 # from logger import Logger
 
-class FightingRoadScraper:
+class MySweetsScraper:
   def __init__(self, logger_exc, logger_nonexc, logger_forall, is_headless=True, is_chrome=True):
     # create a logger for exceptions
     self.logger_exc = logger_exc
@@ -38,17 +38,17 @@ class FightingRoadScraper:
       self.driver = webdriver.Firefox(options=options)
 
   def start(self):
-    self.logger_forall.log('STARTING FightingRoad')
+    self.logger_forall.log('STARTING MySweets')
     try:
-      self.driver.get("https://www.fightingroad.co.jp/")
+      self.driver.get("https://mysweets.jp/")
       array_result = self.__process()
     except LinkCannotProcessException as e:
       self.logger_forall.log(f"FAILED Caught an exception: {e}")
-      self.logger_exc.log(f"An exception occurred in FightingRoad: {e}")
+      self.logger_exc.log(f"An exception occurred in MySweets: {e}")
       return { "is_success": False, "data": None }
     else:
-      self.logger_forall.log('SUCCESS ENDING FightingRoad')
-      self.logger_nonexc.log(f'No exception occurred in FightingRoad)')
+      self.logger_forall.log('SUCCESS ENDING MySweets')
+      self.logger_nonexc.log(f'No exception occurred in MySweets)')
       return { "is_success": True, "data": array_result }
       
   def close(self):
@@ -56,29 +56,31 @@ class FightingRoadScraper:
 
   def __process(self):
     time.sleep(10)
+    array_result = []
     try:
-      link_tag = self.__find_element(self.driver, By.XPATH, '/html/body/div[1]/main/section[2]/div/ul/li[1]/a', None, 10, 5, "a tag")
+      div_tag = self.__find_element(self.driver, By.XPATH, './/*[@id="top"]/main/section/div/div', None, 10, 5, "div tag")
+      article_elements = div_tag.find_elements(By.XPATH, ".//article")
+      for article_element in article_elements:
+        images = []
+        shop_name1 = article_element.find_element(By.XPATH, './/div[2]/p[1]')
+        shop_name2 = article_element.find_element(By.XPATH, './/div[2]/h4')
+
+        image_tag = article_element.find_element(By.XPATH, './/div[1]/img')
+        image_link = image_tag.get_attribute('src')
+        images.append(image_link)
+
+        text_tag1 = article_element.find_element(By.XPATH, './/div[2]/p[2]')
+        text_tag2 = article_element.find_element(By.XPATH, './/div[2]/div[2]')
+
+        link_tag = article_element.find_element(By.XPATH, './/div[2]/div[3]/a[2]')
+        new_link = link_tag.get_attribute('href')
+
+        array_result.append({ "title": f"{shop_name1.text}\n{shop_name2.text}", "images": images, "description": f"{text_tag1.text}\n{text_tag2.text}\n\n今後出店のお店は詳細ページからご確認ください", "site_url": new_link })
+
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
-
-    try:
-      image_tag = self.__find_element(self.driver, By.XPATH, '/html/body/div[1]/main/section[2]/div/ul/li[1]/a/div/img', None, 10, 5, "image tag")
-    except TimeoutException as e:
-      raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
-
-    try:
-      text_tag = self.__find_element(self.driver, By.XPATH, '/html/body/div[1]/main/section[2]/div/ul/li[1]/a/p', None, 10, 5, "text tag")
-    except TimeoutException as e:
-      raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
-
-    new_link = link_tag.get_attribute('href')
-    image_link = image_tag.get_attribute('src')
-    texts = self.__extract_text(text_tag).strip()
-
-    images = []
-    images.append(image_link)
-    
-    return { "description": texts, "site_url": new_link, "images": images, "title": "CAMPAIGN" }
+    else:
+      return array_result
 
   def __find_element(self, driver, locator_type, locator, parent_element=None, timeout=10, max_tries=5, code_line=""):
     for i in range(max_tries):
@@ -114,6 +116,6 @@ class LinkCannotProcessException(Exception):
 #   failed_logger = Logger('failed', current_directory)
 #   success_logger = Logger('success', current_directory)
 
-#   scraper = FightingRoadScraper(failed_logger, success_logger, info_logger, False, False)
+#   scraper = MySweetsScraper(failed_logger, success_logger, info_logger, False, False)
 #   print(scraper.start())
 #   scraper.close()
