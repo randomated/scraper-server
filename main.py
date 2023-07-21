@@ -61,6 +61,8 @@ from scrapers.gaia_ochanomizu import GaiaScraper
 from scrapers.starbucks import StarbucksScraper
 from scrapers.goldwin import GoldwinScraper
 from scrapers.mysweets import MySweetsScraper
+from scrapers.tullys import TullyScraper
+from scrapers.dipunto import DiPuntoScraper
 import os
 
 current_directory = os.path.dirname(os.path.realpath(__file__))
@@ -848,6 +850,96 @@ scrape_list = {
         {
           "store_name": "サンプルストア",
           "wls_id": "688"
+        },
+        {
+          "store_name": "MY SWEETS 渋谷店",
+          "wls_id": "712"
+        },
+        {
+          "store_name": "MY SWEETS 東急プラザ蒲田店",
+          "wls_id": "713"
+        },
+        {
+          "store_name": "MY SWEETS エトモ武蔵小山店",
+          "wls_id": "714"
+        },
+        {
+          "store_name": "MY SWEETS エトモ長津田店",
+          "wls_id": "715"
+        },
+        {
+          "store_name": "MY SWEETS エトモ大井町店",
+          "wls_id": "716"
+        },
+        {
+          "store_name": "MY SWEETS エトモ中央林間店",
+          "wls_id": "718"
+        },
+        {
+          "store_name": "MY SWEETS 二子玉川店",
+          "wls_id": "719"
+        },
+      ]
+    },
+    {
+      'type': 'tullys',
+      'stores': [
+        {
+          "store_name": "タリーズコーヒー代々木駅北口店",
+          "wls_id": "554"
+        },
+        {
+          "store_name": "タリーズコーヒーニュウマン新宿",
+          "wls_id": "553"
+        },
+        {
+          "store_name": "タリーズコーヒー日本赤十字社医療センター店",
+          "wls_id": "552"
+        },
+        {
+          "store_name": "タリーズコーヒー東急プラザ渋谷店",
+          "wls_id": "551"
+        },
+        {
+          "store_name": "タリーズコーヒー渋谷ファイヤー通り店",
+          "wls_id": "550"
+        },
+        {
+          "store_name": "タリーズコーヒー渋谷東急本店前店",
+          "wls_id": "549"
+        },
+        {
+          "store_name": "タリーズコーヒー渋谷ソラスタ店",
+          "wls_id": "548"
+        },
+        {
+          "store_name": "タリーズコーヒー渋谷スクランブルスクエア店",
+          "wls_id": "547"
+        },
+        {
+          "store_name": "タリーズコーヒーエビススバルビル店",
+          "wls_id": "546"
+        }
+      ]
+    },
+    {
+      'type': 'dipunto',
+      'stores': [
+        {
+          "store_name": "Di PUNTO　渋谷店",
+          "wls_id": "595"
+        },
+        {
+          "store_name": "Di PUNTO　渋谷神南店",
+          "wls_id": "594"
+        },
+        {
+          "store_name": "Di PUNTO　渋谷駅前店",
+          "wls_id": "593"
+        },
+        {
+          "store_name": "Di PUNTO　恵比寿店",
+          "wls_id": "592"
         }
       ]
     }
@@ -992,7 +1084,9 @@ class_mapping = {
   "gaia_ochanomizu": GaiaScraper,
   "starbucks": StarbucksScraper,
   "goldwin": GoldwinScraper,
-  "mysweets": MySweetsScraper
+  "mysweets": MySweetsScraper,
+  "tullys": TullyScraper,
+  "dipunto": DiPuntoScraper
 }
 
 will_hide = True
@@ -1021,10 +1115,28 @@ for item in scrape_list["scrape_list"]:
       for res in data:
         contains_data_image = any("data:image" in image_link for image_link in res['images'])
         if not contains_data_image:
-          inserted_id = saver.add_scraped_data(res['title'], res['description'], res['site_url'], res['images'])
-
-          for store in item["stores"]:
-            saver.add_store(inserted_id, store['store_name'], store['wls_id'])
+          if "東急プラザ蒲田店" in res['title']:
+            inserted_id = saver.add_scraped_data(res['title'], res['description'], res['site_url'], res['images'])
+            saver.add_store(inserted_id, "MY SWEETS 渋谷店", 712)
+          if "エトモ長津田店" in res['title']:
+            inserted_id = saver.add_scraped_data(res['title'], res['description'], res['site_url'], res['images'])
+            saver.add_store(inserted_id, "MY SWEETS 東急プラザ蒲田店", 713)
+          if "エトモ武蔵小山店" in res['title']:
+            inserted_id = saver.add_scraped_data(res['title'], res['description'], res['site_url'], res['images'])
+            saver.add_store(inserted_id, "MY SWEETS エトモ武蔵小山店", 714)
+          if "エトモ大井町店" in res['title']:
+            inserted_id = saver.add_scraped_data(res['title'], res['description'], res['site_url'], res['images'])
+            saver.add_store(inserted_id, "MY SWEETS エトモ長津田店", 715)
+          if "エトモ市が尾店" in res['title']:
+            inserted_id = saver.add_scraped_data(res['title'], res['description'], res['site_url'], res['images'])
+            saver.add_store(inserted_id, "MY SWEETS エトモ大井町店", 716)
+          if "エトモ中央林間店" in res['title']:
+            inserted_id = saver.add_scraped_data(res['title'], res['description'], res['site_url'], res['images'])
+            saver.add_store(inserted_id, "MY SWEETS エトモ市ヶ尾店", 717)
+            saver.add_store(inserted_id, "MY SWEETS エトモ中央林間店", 718)
+          if "二子玉川店" in res['title']:
+            inserted_id = saver.add_scraped_data(res['title'], res['description'], res['site_url'], res['images'])
+            saver.add_store(inserted_id, "MY SWEETS 二子玉川店", 719)
   else:
     summary_logger.log(f"{item['type']} FAILED")
 
