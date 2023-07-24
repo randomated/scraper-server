@@ -63,6 +63,7 @@ from scrapers.goldwin import GoldwinScraper
 from scrapers.mysweets import MySweetsScraper
 from scrapers.tullys import TullyScraper
 from scrapers.dipunto import DiPuntoScraper
+from scrapers.pronto import ProntoScraper
 import os
 
 current_directory = os.path.dirname(os.path.realpath(__file__))
@@ -942,6 +943,47 @@ scrape_list = {
           "wls_id": "592"
         }
       ]
+    },
+    {
+      'type': 'pronto',
+      'stores': [
+        {
+          "store_name": "PRONTO MAGNET by SHIBUYA109 店",
+          "wls_id": "590"
+        },
+        {
+          "store_name": "PRONTO　渋谷東武ホテル店",
+          "wls_id": "589"
+        },
+        {
+          "store_name": "PRONTO　北参道店",
+          "wls_id": "588"
+        },
+        {
+          "store_name": "PRONTO　代々木店",
+          "wls_id": "587"
+        },
+        {
+          "store_name": "PRONTO　渋谷宮下公園店",
+          "wls_id": "586"
+        },
+        {
+          "store_name": "PRONTO　渋谷店",
+          "wls_id": "585"
+        },
+        {
+          "store_name": "PRONTO　恵比寿東口店",
+          "wls_id": "584"
+        },
+        {
+          "store_name": "PRONTO　 渋谷フクラス店",
+          "wls_id": "583"
+        },
+        {
+          "store_name": "PRONTO IL BAR　新宿マインズタワー店",
+          "wls_id": "591"
+        }
+      ]
     }
   ]
 }
@@ -1086,7 +1128,8 @@ class_mapping = {
   "goldwin": GoldwinScraper,
   "mysweets": MySweetsScraper,
   "tullys": TullyScraper,
-  "dipunto": DiPuntoScraper
+  "dipunto": DiPuntoScraper,
+  'pronto': ProntoScraper
 }
 
 will_hide = True
