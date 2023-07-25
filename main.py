@@ -64,6 +64,7 @@ from scrapers.mysweets import MySweetsScraper
 from scrapers.tullys import TullyScraper
 from scrapers.dipunto import DiPuntoScraper
 from scrapers.pronto import ProntoScraper
+from scrapers.shibuya_scramble import ShibuyaScrambleScraper
 import os
 
 current_directory = os.path.dirname(os.path.realpath(__file__))
@@ -984,6 +985,15 @@ scrape_list = {
           "wls_id": "591"
         }
       ]
+    },
+    {
+      'type': 'shibuya_scramble',
+      'stores': [
+        {
+          "store_name": "渋谷スクランブルスクエア",
+          "wls_id": "668"
+        }
+      ]
     }
   ]
 }
@@ -1129,7 +1139,8 @@ class_mapping = {
   "mysweets": MySweetsScraper,
   "tullys": TullyScraper,
   "dipunto": DiPuntoScraper,
-  'pronto': ProntoScraper
+  'pronto': ProntoScraper,
+  "shibuya_scramble": ShibuyaScrambleScraper
 }
 
 will_hide = True
