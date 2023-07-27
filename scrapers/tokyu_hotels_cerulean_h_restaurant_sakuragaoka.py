@@ -56,30 +56,33 @@ class TokyuHotelsCeruleanHRestaurantSakuragaokaScraper:
 
   def __process(self):
     time.sleep(10)
+
     try:
-      image_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="main-content"]/section/div[6]/div[1]/div/div/div/div/div[4]/div/div/div/div/div[1]/div/div/div/div/div/div/div/div/div[1]/div/img', None, 10, 5, "image tag")
+      link_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="main-content"]/section/div[6]/div[1]/div/div/div/div/div[3]/div/div/div/div/div[2]/div/div[2]/div/div/ul/li/a', None, 10, 5, "a tag")
+      new_link = link_tag.get_attribute('href')
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      h1_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="main-content"]/section/div[6]/div[1]/div/div/div/div/div[1]/div/div[2]/div/div/div/h2', None, 10, 5, "h2 tag")
-      # h1_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="main-content"]/section/div[6]/div[1]/div/div/div/div/div[2]/p/strong', None, 10, 5, "h2 tag")
+      image_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="main-content"]/section/div[6]/div[1]/div/div/div/div/div[3]/div/div/div/div/div[1]/div/div/div/div/div/div/div/div/div/div/img', None, 10, 5, "image tag")
+      image_link = image_tag.get_attribute('src')
+      images = []
+      images.append(image_link)
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      text_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="main-content"]/section/div[6]/div[1]/div/div/div/div/div[3]/p', None, 10, 5, "text tag")
+      h1_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="main-content"]/section/div[6]/div[1]/div/div/div/div/div[1]/p', None, 10, 5, "h2 tag")
+      h1_text = h1_tag.text
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
-    h1_text = h1_tag.text
-    new_link = "https://www.tokyuhotels.co.jp/cerulean-h/restaurant/sakuragaoka/index.html"
-    image_link = image_tag.get_attribute('src')
-    texts = self.__extract_text(text_tag).strip()
+    try:
+      text_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="main-content"]/section/div[6]/div[1]/div/div/div/div/div[2]', None, 10, 5, "text tag")
+      texts = self.__extract_text(text_tag).strip()
+    except TimeoutException as e:
+      raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
-    images = []
-    images.append(image_link)
-    
     return { "description": texts, "site_url": new_link, "images": images, "title": h1_text }
 
   def __find_element(self, driver, locator_type, locator, parent_element=None, timeout=10, max_tries=5, code_line=""):
