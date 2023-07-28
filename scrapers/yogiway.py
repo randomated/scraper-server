@@ -57,17 +57,17 @@ class YogiwayScraper:
   def __process(self):
     time.sleep(10)
     try:
-      link_tag = self.__find_element(self.driver, By.XPATH, './/div[1]/div/div/div/div[2]/div/div/div[1]/div/div[2]/div/article/div/div[2]/a', None, 10, 5, "a tag")
+      link_tag = self.__find_element(self.driver, By.XPATH, '//div[@data-idx="0"]/div[@data-hook="item-container"]/div[2]/div/article/div/div[2]/a', None, 10, 5, "a tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      image_tag = self.__find_element(self.driver, By.XPATH, './/div[1]/div/div/div/div[2]/div/div/div[1]/div/div[1]/div/div/img', None, 10, 5, "image tag")
+      image_tag = self.__find_element(self.driver, By.XPATH, '//div[@data-idx="0"]/div[@data-hook="item-container"]/div/div[@data-hook="item-wrapper"]/div[@data-hook="image-item"]/img', None, 10, 5, "image tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      text_tag = self.__find_element(self.driver, By.XPATH, './/div[1]/div/div/div/div[2]/div/div/div[1]/div/div[2]/div/article/div/div[2]/a/div/div/p', None, 10, 5, "text tag")
+      text_tag = self.__find_element(self.driver, By.XPATH, '//div[@data-idx="0"]/div[@data-hook="item-container"]/div[2]/div/article/div/div[2]/a/div/div/p', None, 10, 5, "text tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 

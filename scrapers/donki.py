@@ -7,9 +7,10 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.remote.webelement import WebElement
 import time
+import re
 # from logger import Logger
 
-class MizunoScraper:
+class DonkiScraper:
   def __init__(self, logger_exc, logger_nonexc, logger_forall, is_headless=True, is_chrome=True):
     # create a logger for exceptions
     self.logger_exc = logger_exc
@@ -38,17 +39,17 @@ class MizunoScraper:
       self.driver = webdriver.Firefox(options=options)
 
   def start(self):
-    self.logger_forall.log('STARTING Mizuno')
+    self.logger_forall.log('STARTING Donki')
     try:
-      self.driver.get("https://jpn.mizuno.com/campaign?did=dtctop_campaignlist")
+      self.driver.get("https://www.donki.com/")
       array_result = self.__process()
     except LinkCannotProcessException as e:
       self.logger_forall.log(f"FAILED Caught an exception: {e}")
-      self.logger_exc.log(f"An exception occurred in Mizuno: {e}")
+      self.logger_exc.log(f"An exception occurred in Donki: {e}")
       return { "is_success": False, "data": None }
     else:
-      self.logger_forall.log('SUCCESS ENDING Mizuno')
-      self.logger_nonexc.log(f'No exception occurred in Mizuno)')
+      self.logger_forall.log('SUCCESS ENDING Donki')
+      self.logger_nonexc.log(f'No exception occurred in Donki)')
       return { "is_success": True, "data": array_result }
       
   def close(self):
@@ -57,22 +58,23 @@ class MizunoScraper:
   def __process(self):
     time.sleep(10)
     try:
-      link_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="block-mizuno-theme-content"]/article/div/div[2]/div/div/div[1]/ul/li[1]/a', None, 10, 5, "a tag")
+      link_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="campContents"]/div[1]/a', None, 10, 5, "a tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      image_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="block-mizuno-theme-content"]/article/div/div[2]/div/div/div[1]/ul/li[1]/a/picture/img', None, 10, 5, "image tag")
+      image_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="campContents"]/div[1]/a/div/img', None, 10, 5, "image tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      text_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="block-mizuno-theme-content"]/article/div/div[2]/div/div/div[1]/ul/li[1]/a/p', None, 10, 5, "text tag")
+      text_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="campContents"]/div[1]/a/span', None, 10, 5, "text tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     new_link = link_tag.get_attribute('href')
     image_link = image_tag.get_attribute('src')
+    
     texts = self.__extract_text(text_tag).strip()
 
     images = []
@@ -114,6 +116,6 @@ class LinkCannotProcessException(Exception):
 #   failed_logger = Logger('failed', current_directory)
 #   success_logger = Logger('success', current_directory)
 
-#   scraper = MizunoScraper(failed_logger, success_logger, info_logger, False, False)
+#   scraper = DonkiScraper(failed_logger, success_logger, info_logger, False, False)
 #   print(scraper.start())
 #   scraper.close()

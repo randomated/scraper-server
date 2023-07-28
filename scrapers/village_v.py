@@ -58,17 +58,17 @@ class VillageVScraper:
   def __process(self):
     time.sleep(10)
     try:
-      link_tag = self.__find_element(self.driver, By.XPATH, '/html/body/main/div[4]/div[2]/section/div[2]/div/div/div[1]/div[1]/p/a', None, 10, 5, "a tag")
+      link_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="top_topics"]/div[2]/section/div[2]/div/div[1]/div/div[2]/div[1]/div[1]/p[2]/a', None, 10, 5, "a tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      image_tag = self.__find_element(self.driver, By.XPATH, '/html/body/main/div[4]/div[2]/section/div[2]/div/div/div[1]/div[1]/p/a', None, 10, 5, "image tag")
+      image_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="top_topics"]/div[2]/section/div[2]/div/div[1]/div/div[2]/div[1]/div[1]/p[2]/a', None, 10, 5, "image tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      text_tag = self.__find_element(self.driver, By.XPATH, '/html/body/main/div[4]/div[2]/section/div[2]/div/div/div[1]/div[2]/p[1]/a', None, 10, 5, "text tag")
+      text_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="top_topics"]/div[2]/section/div[2]/div/div[1]/div/div[2]/div[1]/div[2]/p[1]/a', None, 10, 5, "text tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
@@ -80,7 +80,7 @@ class VillageVScraper:
     images = []
     images.append(image_link)
     
-    return { "description": texts, "site_url": new_link, "images": images, "title": "イベント情報" }
+    return { "description": texts, "site_url": new_link, "images": images, "title": "" }
 
   def __find_element(self, driver, locator_type, locator, parent_element=None, timeout=10, max_tries=5, code_line=""):
     for i in range(max_tries):
@@ -116,6 +116,6 @@ class LinkCannotProcessException(Exception):
 #   failed_logger = Logger('failed', current_directory)
 #   success_logger = Logger('success', current_directory)
 
-#   scraper = VillageVScraper(failed_logger, success_logger, info_logger, False, False)
+#   scraper = VillageVScraper(failed_logger, success_logger, info_logger, False, True)
 #   print(scraper.start())
 #   scraper.close()

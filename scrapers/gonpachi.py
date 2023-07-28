@@ -57,17 +57,17 @@ class GonpachiScraper:
   def __process(self):
     time.sleep(10)
     try:
-      link_tag = self.__find_element(self.driver, By.XPATH, './/div[1]/article[1]/div[1]/a', None, 10, 5, "a tag")
+      link_tag = self.__find_element(self.driver, By.XPATH, '//div/article[1]/h2/a', None, 10, 5, "a tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      image_tag = self.__find_element(self.driver, By.XPATH, './/div[1]/article[1]/div[1]/a/img', None, 10, 5, "image tag")
+      image_tag = self.__find_element(self.driver, By.XPATH, '//div/article[1]/div[1]/a/img', None, 10, 5, "image tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      text_tag = self.__find_element(self.driver, By.XPATH, './/div[1]/article[1]/h2/a', None, 10, 5, "text tag")
+      text_tag = self.__find_element(self.driver, By.XPATH, '//div/article[1]/h2/a', None, 10, 5, "text tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
@@ -78,7 +78,7 @@ class GonpachiScraper:
     images = []
     images.append(image_link)
     
-    return { "description": texts, "site_url": new_link, "images": images, "title": "NEWS" }
+    return { "description": texts, "site_url": new_link, "images": images, "title": "" }
 
   def __find_element(self, driver, locator_type, locator, parent_element=None, timeout=10, max_tries=5, code_line=""):
     for i in range(max_tries):

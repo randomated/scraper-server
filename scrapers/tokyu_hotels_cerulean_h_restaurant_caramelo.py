@@ -57,17 +57,17 @@ class TokyuHotelsCeruleanHRestaurantCarameloScraper:
   def __process(self):
     time.sleep(10)
     try:
-      image_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="main-content"]/section/div[6]/div/div/div/div/div/div[2]/div/div/div/div/div[1]/div/div/div/div/div/div/div/div/div/div/img', None, 10, 5, "image tag")
+      image_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="main-content"]/section/div[3]/div/div/div/div/div[1]/div/div[1]/div/div/div/div/div/div/div[1]/div[1]/img[1]', None, 10, 5, "image tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      h1_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="main-content"]/section/div[6]/div/div/div/div/div/div[1]/div/div/div/div/div/h3', None, 10, 5, "h2 tag")
+      h1_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="topic-path"]/div/ol/li[3]/a/h1', None, 10, 5, "h1 tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      text_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="main-content"]/section/div[6]/div/div/div/div/div/div[2]/div/div/div/div/div[2]/div/div[1]/div/div[1]/p', None, 10, 5, "text tag")
+      text_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="main-content"]/section/div[1]/p', None, 10, 5, "text tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
