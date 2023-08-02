@@ -1186,7 +1186,7 @@ for item in scrape_list["scrape_list"]:
             saver.add_store(inserted_id, "MY SWEETS エトモ大井町店", 716)
           if "エトモ中央林間店" in res['title']:
             inserted_id = saver.add_scraped_data(res['title'], res['description'], "https://mysweets.jp/#shop-post_340", res['images'])
-            saver.add_store(inserted_id, "MY SWEETS エトモ市ヶ尾店", 717)
+            saver.add_store(inserted_id, "MY SWEETS エトモ市が尾店", 717)
             saver.add_store(inserted_id, "MY SWEETS エトモ中央林間店", 718)
           if "二子玉川店" in res['title']:
             inserted_id = saver.add_scraped_data(res['title'], res['description'], "https://mysweets.jp/#shop-post_333", res['images'])
