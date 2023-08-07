@@ -62,6 +62,9 @@ class MySweetsScraper:
       article_elements = div_tag.find_elements(By.XPATH, ".//article")
       for article_element in article_elements:
         images = []
+
+        article_id = article_element.get_attribute('id')
+
         shop_name1 = article_element.find_element(By.XPATH, './/div[2]/p[1]')
         shop_name2 = article_element.find_element(By.XPATH, './/div[2]/h4')
 
@@ -75,7 +78,7 @@ class MySweetsScraper:
         link_tag = article_element.find_element(By.XPATH, './/div[2]/div[3]/a[2]')
         new_link = link_tag.get_attribute('href')
 
-        array_result.append({ "title": f"{shop_name1.text}\n{shop_name2.text}", "images": images, "description": f"{text_tag1.text}\n{text_tag2.text}\n\n今後出店のお店は詳細ページからご確認ください", "site_url": new_link })
+        array_result.append({ "title": f"{shop_name1.text}\n{shop_name2.text}", "images": images, "description": f"{text_tag1.text}\n{text_tag2.text}\n\n今後出店のお店は詳細ページからご確認ください", "site_url": "https://mysweets.jp/#{article_id}" })
 
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
@@ -117,10 +120,6 @@ class LinkCannotProcessException(Exception):
 #   success_logger = Logger('success', current_directory)
 
 #   scraper = MySweetsScraper(failed_logger, success_logger, info_logger, False, False)
-#   stores = scraper['data']
-
-#   matches = [store for store in store_list if store["store_name"] == target_store_name]
-#   return next(iter(matches), None)
 
 #   print(scraper.start())
 #   scraper.close()

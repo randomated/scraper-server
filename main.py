@@ -850,10 +850,6 @@ scrape_list = {
       'type': 'mysweets',
       'stores': [
         {
-          "store_name": "サンプルストア",
-          "wls_id": "688"
-        },
-        {
           "store_name": "MY SWEETS 渋谷店",
           "wls_id": "712"
         },
@@ -872,6 +868,10 @@ scrape_list = {
         {
           "store_name": "MY SWEETS エトモ大井町店",
           "wls_id": "716"
+        },
+        {
+          "store_name": "MY SWEETS エトモ市ヶ尾店",
+          "wls_id": "717"
         },
         {
           "store_name": "MY SWEETS エトモ中央林間店",
@@ -991,7 +991,7 @@ scrape_list = {
       'stores': [
         {
           "store_name": "渋谷スクランブルスクエア",
-          "wls_id": "668"
+          "wls_id": "710"
         }
       ]
     }
@@ -1169,28 +1169,28 @@ for item in scrape_list["scrape_list"]:
       for res in data:
         contains_data_image = any("data:image" in image_link for image_link in res['images'])
         if not contains_data_image:
-          if "東急プラザ蒲田店" in res['title']:
-            inserted_id = saver.add_scraped_data(res['title'], res['description'], "https://mysweets.jp/#shop-post_334", res['images'])
+          if "モンリブラン" in res['title']:
+            inserted_id = saver.add_scraped_data(res['title'], res['description'], data['site_url'], res['images'])
             saver.add_store(inserted_id, "MY SWEETS 渋谷店", 712)
-          if "エトモ長津田店" in res['title']:
-            inserted_id = saver.add_scraped_data(res['title'], res['description'], "https://mysweets.jp/#shop-post_345", res['images'])
+          if "パイクイーン" in res['title']:
+            inserted_id = saver.add_scraped_data(res['title'], res['description'], data['site_url'], res['images'])
             saver.add_store(inserted_id, "MY SWEETS 東急プラザ蒲田店", 713)
-          if "エトモ武蔵小山店" in res['title']:
-            inserted_id = saver.add_scraped_data(res['title'], res['description'], "https://mysweets.jp/#shop-post_343", res['images'])
+          if "京王プラザホテル" in res['title']:
+            inserted_id = saver.add_scraped_data(res['title'], res['description'], data['site_url'], res['images'])
             saver.add_store(inserted_id, "MY SWEETS エトモ武蔵小山店", 714)
-          if "エトモ大井町店" in res['title']:
-            inserted_id = saver.add_scraped_data(res['title'], res['description'], "https://mysweets.jp/#shop-post_344", res['images'])
+          if "銀座立田野" in res['title']:
+            inserted_id = saver.add_scraped_data(res['title'], res['description'], data['site_url'], res['images'])
             saver.add_store(inserted_id, "MY SWEETS エトモ長津田店", 715)
-          if "エトモ市が尾店" in res['title']:
-            inserted_id = saver.add_scraped_data(res['title'], res['description'], "https://mysweets.jp/#shop-post_342", res['images'])
-            saver.add_store(inserted_id, "MY SWEETS エトモ大井町店", 716)
-          if "エトモ中央林間店" in res['title']:
-            inserted_id = saver.add_scraped_data(res['title'], res['description'], "https://mysweets.jp/#shop-post_341", res['images'])
-            saver.add_store(inserted_id, "MY SWEETS エトモ市が尾店", 717)
-            saver.add_store(inserted_id, "MY SWEETS エトモ中央林間店", 718)
-          if "二子玉川店" in res['title']:
-            inserted_id = saver.add_scraped_data(res['title'], res['description'], "https://mysweets.jp/#shop-post_346", res['images'])
-            saver.add_store(inserted_id, "MY SWEETS 二子玉川店", 719)
+          # if "シューザック" in res['title']:
+          #   inserted_id = saver.add_scraped_data(res['title'], res['description'], "https://mysweets.jp/#shop-post_342", res['images'])
+          #   saver.add_store(inserted_id, "MY SWEETS エトモ大井町店", 716)
+          # if "エトモ中央林間店" in res['title']:
+          #   inserted_id = saver.add_scraped_data(res['title'], res['description'], "https://mysweets.jp/#shop-post_341", res['images'])
+          #   saver.add_store(inserted_id, "MY SWEETS エトモ市が尾店", 717)
+          #   saver.add_store(inserted_id, "MY SWEETS エトモ中央林間店", 718)
+          # if "二子玉川店" in res['title']:
+          #   inserted_id = saver.add_scraped_data(res['title'], res['description'], "https://mysweets.jp/#shop-post_346", res['images'])
+          #   saver.add_store(inserted_id, "MY SWEETS 二子玉川店", 719)
   else:
     summary_logger.log(f"{item['type']} FAILED")
 
