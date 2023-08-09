@@ -849,43 +849,6 @@ scrape_list = {
       ]
     },
     {
-      'type': 'mysweets',
-      'stores': [
-        {
-          "store_name": "MY SWEETS 渋谷店",
-          "wls_id": "712"
-        },
-        {
-          "store_name": "MY SWEETS 東急プラザ蒲田店",
-          "wls_id": "713"
-        },
-        {
-          "store_name": "MY SWEETS エトモ武蔵小山店",
-          "wls_id": "714"
-        },
-        {
-          "store_name": "MY SWEETS エトモ長津田店",
-          "wls_id": "715"
-        },
-        {
-          "store_name": "MY SWEETS エトモ大井町店",
-          "wls_id": "716"
-        },
-        {
-          "store_name": "MY SWEETS エトモ市ヶ尾店",
-          "wls_id": "717"
-        },
-        {
-          "store_name": "MY SWEETS エトモ中央林間店",
-          "wls_id": "718"
-        },
-        {
-          "store_name": "MY SWEETS 二子玉川店",
-          "wls_id": "719"
-        },
-      ]
-    },
-    {
       'type': 'tullys',
       'stores': [
         {
@@ -1014,85 +977,46 @@ scrape_list = {
           "wls_id": "209"
         }
       ]
+    },
+    {
+      'type': 'mysweets',
+      'stores': [
+        {
+          "store_name": "MY SWEETS 渋谷店",
+          "wls_id": "712"
+        },
+        {
+          "store_name": "MY SWEETS 東急プラザ蒲田店",
+          "wls_id": "713"
+        },
+        {
+          "store_name": "MY SWEETS エトモ武蔵小山店",
+          "wls_id": "714"
+        },
+        {
+          "store_name": "MY SWEETS エトモ長津田店",
+          "wls_id": "715"
+        },
+        {
+          "store_name": "MY SWEETS エトモ大井町店",
+          "wls_id": "716"
+        },
+        {
+          "store_name": "MY SWEETS エトモ市ヶ尾店",
+          "wls_id": "717"
+        },
+        {
+          "store_name": "MY SWEETS エトモ中央林間店",
+          "wls_id": "718"
+        },
+        {
+          "store_name": "MY SWEETS 二子玉川店",
+          "wls_id": "719"
+        }
+      ]
     }
   ]
 }
-
-
-# {
-#   "type": "seria_group",
-#   "stores": [
-#     {
-#       "store_name": "Seria代官山アドレス・ディセ店",
-#       "wls_id": "223"
-#     }
-#   ]
-# },
-# {
-#   "type": "store_united_arrows",
-#   "stores": [
-#     {
-#       "store_name": "ユナイテッドアローズ アトレ恵比寿 ウィメンズストア",
-#       "wls_id": "190"
-#     },
-#     {
-#       "store_name": "ユナイテッドアローズ 渋谷スクランブルスクエア店",
-#       "wls_id": "189"
-#     },
-#     {
-#       "store_name": "オデット エ オディール 渋谷シンクス店",
-#       "wls_id": "188"
-#     },
-#     {
-#       "store_name": "ユナイテッドアローズ 渋谷シンクス ウィメンズストア",
-#       "wls_id": "187"
-#     },
-#     {
-#       "store_name": "ロク 渋谷キャットストリート店 （ROKU SHIBUYA CAT STREET）",
-#       "wls_id": "186"
-#     },
-#     {
-#       "store_name": "UNITED ARROWS ディストリクト",
-#       "wls_id": "185"
-#     },
-#     {
-#       "store_name": "ユナイテッドアローズ＆サンズ （UNITED ARROWS & SONS）",
-#       "wls_id": "184"
-#     },
-#     {
-#       "store_name": "ユナイテッドアローズ 原宿本店",
-#       "wls_id": "183"
-#     }
-#   ]
-# },
-# {
-#   "type": "nergy",
-#   "stores": [
-#     {
-#       "store_name": "nergy ATRE EBISU",
-#       "wls_id": "165"
-#     },
-#     {
-#       "store_name": "nergy SHIBUYA SCRAMBLE SQUARE",
-#       "wls_id": "164"
-#     }
-#   ]
-# },
-# {
-#   "stores": [
-#     {
-#       "store_name": "椿屋カフェ フレンテ笹塚店",
-#       "wls_id": "620"
-#     },
-#     {
-#       "store_name": "椿屋カフェ 渋谷店",
-#       "wls_id": "619"
-#     }
-#   ],
-#   'type': 'towafood'
-# },
-
-
 
 # Mapping between JSON types and classes
 class_mapping = {
@@ -1168,6 +1092,11 @@ class_mapping = {
 will_hide = True
 is_chrome = True
 
+
+def create_record(title, description, site_url, images, store_name, wls_id):
+  inserted_id = saver.add_scraped_data(title.split("\n")[1], description, site_url, images)
+  saver.add_store(inserted_id, store_name, wls_id)
+
 for item in scrape_list["scrape_list"]:
   cls = class_mapping[item['type']]
   scraper = cls(failed_logger, success_logger, info_logger, will_hide, is_chrome)
@@ -1191,28 +1120,22 @@ for item in scrape_list["scrape_list"]:
       for res in data:
         contains_data_image = any("data:image" in image_link for image_link in res['images'])
         if not contains_data_image:
-          if "モンリブラン" in res['title']:
-            inserted_id = saver.add_scraped_data(res['title'], res['description'], data['site_url'], res['images'])
-            saver.add_store(inserted_id, "MY SWEETS 渋谷店", 712)
-          if "パイクイーン" in res['title']:
-            inserted_id = saver.add_scraped_data(res['title'], res['description'], data['site_url'], res['images'])
-            saver.add_store(inserted_id, "MY SWEETS 東急プラザ蒲田店", 713)
-          if "京王プラザホテル" in res['title']:
-            inserted_id = saver.add_scraped_data(res['title'], res['description'], data['site_url'], res['images'])
-            saver.add_store(inserted_id, "MY SWEETS エトモ武蔵小山店", 714)
-          if "銀座立田野" in res['title']:
-            inserted_id = saver.add_scraped_data(res['title'], res['description'], data['site_url'], res['images'])
-            saver.add_store(inserted_id, "MY SWEETS エトモ長津田店", 715)
-          # if "シューザック" in res['title']:
-          #   inserted_id = saver.add_scraped_data(res['title'], res['description'], "https://mysweets.jp/#shop-post_342", res['images'])
-          #   saver.add_store(inserted_id, "MY SWEETS エトモ大井町店", 716)
-          # if "エトモ中央林間店" in res['title']:
-          #   inserted_id = saver.add_scraped_data(res['title'], res['description'], "https://mysweets.jp/#shop-post_341", res['images'])
-          #   saver.add_store(inserted_id, "MY SWEETS エトモ市が尾店", 717)
-          #   saver.add_store(inserted_id, "MY SWEETS エトモ中央林間店", 718)
-          # if "二子玉川店" in res['title']:
-          #   inserted_id = saver.add_scraped_data(res['title'], res['description'], "https://mysweets.jp/#shop-post_346", res['images'])
-          #   saver.add_store(inserted_id, "MY SWEETS 二子玉川店", 719)
+          if "渋谷店" in res['title']:
+            create_record(res['title'], res['description'], res['site_url'], res['images'], "MY SWEETS 渋谷店", 712)
+          if "東急プラザ蒲田店" in res['title']:
+            create_record(res['title'], res['description'], res['site_url'], res['images'], "MY SWEETS 東急プラザ蒲田店", 713)
+          if "エトモ武蔵小山店" in res['title']:
+            create_record(res['title'], res['description'], res['site_url'], res['images'], "MY SWEETS エトモ武蔵小山店", 714)
+          if "エトモ長津田店" in res['title']:
+            create_record(res['title'], res['description'], res['site_url'], res['images'], "MY SWEETS エトモ長津田店", 715)
+          if "エトモ大井町店" in res['title']:
+            create_record(res['title'], res['description'], res['site_url'], res['images'], "MY SWEETS エトモ大井町店", 716)
+          if "エトモ市が尾店" in res['title']:
+            create_record(res['title'], res['description'], res['site_url'], res['images'], "MY SWEETS エトモ市ヶ尾店", 717)
+          if "エトモ中央林間店" in res['title']:
+            create_record(res['title'], res['description'], res['site_url'], res['images'], "MY SWEETS エトモ中央林間店", 718)
+          if "二子玉川店" in res['title']:
+            create_record(res['title'], res['description'], res['site_url'], res['images'], "MY SWEETS 二子玉川店", 719)
   else:
     summary_logger.log(f"{item['type']} FAILED")
 

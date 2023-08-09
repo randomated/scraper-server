@@ -78,7 +78,7 @@ class MySweetsScraper:
         link_tag = article_element.find_element(By.XPATH, './/div[2]/div[3]/a[2]')
         new_link = link_tag.get_attribute('href')
 
-        array_result.append({ "title": f"{shop_name1.text}\n{shop_name2.text}", "images": images, "description": f"{text_tag1.text}\n{text_tag2.text}\n\n今後出店のお店は詳細ページからご確認ください", "site_url": "https://mysweets.jp/#{article_id}" })
+        array_result.append({ "title": f"{shop_name1.text}\n{shop_name2.text}", "images": images, "description": f"{text_tag1.text}\n{text_tag2.text}\n\n今後出店のお店は詳細ページからご確認ください", "site_url": f"https://mysweets.jp/#{article_id}" })
 
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
