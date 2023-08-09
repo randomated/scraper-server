@@ -65,6 +65,8 @@ from scrapers.tullys import TullyScraper
 from scrapers.dipunto import DiPuntoScraper
 from scrapers.pronto import ProntoScraper
 from scrapers.shibuya_scramble import ShibuyaScrambleScraper
+from scrapers.donki import DonkiScraper
+from scrapers.momastore import MomastoreScraper
 import os
 
 current_directory = os.path.dirname(os.path.realpath(__file__))
@@ -959,6 +961,24 @@ scrape_list = {
       ]
     },
     {
+      'type': 'donki',
+      'stores': [
+        {
+          "store_name": "MEGAドン・キホーテ渋谷本店",
+          "wls_id": "235"
+        }
+      ]
+    },
+    {
+      'type': 'momastore',
+      'stores': [
+        {
+          "store_name": "MoMADesignStore表参道",
+          "wls_id": "209"
+        }
+      ]
+    },
+    {
       'type': 'mysweets',
       'stores': [
         {
@@ -992,7 +1012,7 @@ scrape_list = {
         {
           "store_name": "MY SWEETS 二子玉川店",
           "wls_id": "719"
-        },
+        }
       ]
     }
   ]
@@ -1064,7 +1084,9 @@ class_mapping = {
   "tullys": TullyScraper,
   "dipunto": DiPuntoScraper,
   'pronto': ProntoScraper,
-  "shibuya_scramble": ShibuyaScrambleScraper
+  "shibuya_scramble": ShibuyaScrambleScraper,
+  'donki': DonkiScraper,
+  'momastore': MomastoreScraper,
 }
 
 will_hide = True

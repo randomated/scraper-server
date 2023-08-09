@@ -58,17 +58,17 @@ class PhitenScraper:
   def __process(self):
     
     try:
-      link_tag = self.__find_element(self.driver, By.XPATH, './/main/div[2]/div/ul/li[1]/a', None, 10, 5, "a tag")
+      link_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="news"]/div/div/main/div[2]/div/ul/li[1]/a', None, 10, 5, "a tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
     
     try:
-      image_tag = self.__find_element(self.driver, By.XPATH, './/main/div[2]/div/ul/li[1]/a/div[1]/span', None, 10, 5, "image tag")
+      image_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="news"]/div/div/main/div[2]/div/ul/li[1]/a/div[1]/span', None, 10, 5, "image tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      text_tag = self.__find_element(self.driver, By.XPATH, './/main/div[2]/div/ul/li[1]/a/div[2]/div[2]', None, 10, 5, "text tag")
+      text_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="news"]/div/div/main/div[2]/div/ul/li[1]/a/div[2]', None, 10, 5, "text tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
@@ -81,7 +81,7 @@ class PhitenScraper:
     images.append(image_link)
     texts = self.__extract_text(text_tag).strip()
     
-    return { "description": texts, "site_url": new_link, "images": images, "title": "新着情報" }
+    return { "description": texts, "site_url": new_link, "images": images, "title": "" }
 
   def __find_element(self, driver, locator_type, locator, parent_element=None, timeout=10, max_tries=5, code_line=""):
     for i in range(max_tries):

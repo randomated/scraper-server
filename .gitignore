@@ -4,3 +4,4 @@ geckodriver.log
 logs/
 datas/
 **/__pycache__/
+.venv/
