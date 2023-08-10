@@ -58,6 +58,7 @@ class MugendaiYoshimotoScraper:
   def __process(self):
     time.sleep(10)
     self.driver.execute_script("window.scrollTo(0, 200);")
+    images = []
     try:
       link_tag = self.__find_element(self.driver, By.XPATH, '/html/body/main/div[4]/div/ul/li[1]/a', None, 10, 5, "a tag")
     except TimeoutException as e:
@@ -65,22 +66,27 @@ class MugendaiYoshimotoScraper:
 
     try:
       image_tag = self.__find_element(self.driver, By.XPATH, '/html/body/main/div[4]/div/ul/li[1]/a/div', None, 10, 5, "image tag")
-    except TimeoutException as e:
-      raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
-
-    try:
-      text_tag = self.__find_element(self.driver, By.XPATH, '/html/body/main/div[4]/div/ul/li[1]/a/span[2]', None, 10, 5, "text tag")
+      image_link = image_tag.get_attribute("data-src")
+      images.append(image_link)
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     new_link = link_tag.get_attribute('href')
-    image_link = image_tag.get_attribute("data-src")
-    texts = self.__extract_text(text_tag).strip()
+    self.driver.get(new_link)
 
-    images = []
-    images.append(image_link)
+    try:
+      time.sleep(5)
+      h1_tag = self.__find_element(self.driver, By.XPATH, '/html/body/main/section/div/div[1]/h2', None, 10, 5, "h2 tag")
+    except TimeoutException as e:
+      raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
+
+    try:
+      text_tag = self.__find_element(self.driver, By.XPATH, '//*[@class="block-editor"]', None, 10, 5, "text tag")
+      texts = self.__extract_text(text_tag).strip()[:105] + "..."
+    except TimeoutException as e:
+      raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
     
-    return { "description": texts, "site_url": new_link, "images": images, "title": "TOPICS" }
+    return { "description": texts, "site_url": new_link, "images": images, "title": h1_tag.text }
 
   def __find_element(self, driver, locator_type, locator, parent_element=None, timeout=10, max_tries=5, code_line=""):
     for i in range(max_tries):

@@ -89,7 +89,7 @@ class ShibuyaScrambleScraper:
 
     try:
       text_tag = self.__find_element(self.driver, By.XPATH, '/html/body/div[5]/div/div/div/div/div/div/div[2]/div[2]/p[3]', None, 10, 5, "text tag")
-      texts = self.__extract_text(text_tag).strip()
+      texts = self.__extract_text(text_tag).strip()[:105] + "..."
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
