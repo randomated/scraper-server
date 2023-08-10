@@ -71,13 +71,13 @@ class NaturalLawsonScraper:
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
-    texts = self.__extract_text(text_tag).strip()
+    texts = text_tag.text # self.__extract_text(text_tag).strip()
     new_link = link_tag.get_attribute('href')
     image_link = image_tag.get_attribute('src')
     images = []
     images.append(image_link)
     
-    return { "description": texts, "site_url": new_link, "images": images, "title": "新商品" }
+    return { "description": texts, "site_url": new_link, "images": images, "title": "" }
 
   def __find_element(self, driver, locator_type, locator, parent_element=None, timeout=10, max_tries=5, code_line=""):
     for i in range(max_tries):
