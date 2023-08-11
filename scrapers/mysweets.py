@@ -72,8 +72,8 @@ class MySweetsScraper:
         image_link = image_tag.get_attribute('src')
         images.append(image_link)
 
-        text_tag1 = article_element.find_element(By.XPATH, './/div[2]/p[2]')
-        text_tag2 = article_element.find_element(By.XPATH, './/div[2]/div[2]')
+        text_tag1 = article_element.find_element(By.XPATH, '//*[@class="shop-item-name"]')
+        text_tag2 = article_element.find_element(By.XPATH, '//*[@class="shop-item-txt"]')
 
         link_tag = article_element.find_element(By.XPATH, './/div[2]/div[3]/a[2]')
         new_link = link_tag.get_attribute('href')
