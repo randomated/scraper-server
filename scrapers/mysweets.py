@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.remote.webelement import WebElement
 import time
-# from logger import Logger
+from logger import Logger
 
 class MySweetsScraper:
   def __init__(self, logger_exc, logger_nonexc, logger_forall, is_headless=True, is_chrome=True):
@@ -71,9 +71,9 @@ class MySweetsScraper:
         image_tag = article_element.find_element(By.XPATH, './/div[1]/img')
         image_link = image_tag.get_attribute('src')
         images.append(image_link)
-
-        text_tag1 = article_element.find_element(By.XPATH, '//*[@class="shop-item-name"]')
-        text_tag2 = article_element.find_element(By.XPATH, '//*[@class="shop-item-txt"]')
+        
+        text_tag1 = article_element.find_element(By.XPATH, './/*[@class="shop-item-name"]')
+        text_tag2 = article_element.find_element(By.XPATH, './/*[@class="shop-item-txt"]')
 
         link_tag = article_element.find_element(By.XPATH, './/div[2]/div[3]/a[2]')
         new_link = link_tag.get_attribute('href')
@@ -113,13 +113,13 @@ class MySweetsScraper:
 class LinkCannotProcessException(Exception):
   pass
 
-# if __name__ == '__main__':
-#   current_directory = "/Users/argiebacomo/Desktop/python_stuffs/scraper-server"
-#   info_logger = Logger('info', current_directory)
-#   failed_logger = Logger('failed', current_directory)
-#   success_logger = Logger('success', current_directory)
+if __name__ == '__main__':
+  current_directory = "/Users/argiebacomo/Desktop/python_stuffs/scraper-server"
+  info_logger = Logger('info', current_directory)
+  failed_logger = Logger('failed', current_directory)
+  success_logger = Logger('success', current_directory)
 
-#   scraper = MySweetsScraper(failed_logger, success_logger, info_logger, False, False)
+  scraper = MySweetsScraper(failed_logger, success_logger, info_logger, False, False)
 
-#   print(scraper.start())
-#   scraper.close()
+  print(scraper.start())
+  scraper.close()
