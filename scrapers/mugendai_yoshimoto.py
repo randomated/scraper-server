@@ -60,12 +60,12 @@ class MugendaiYoshimotoScraper:
     self.driver.execute_script("window.scrollTo(0, 200);")
     images = []
     try:
-      link_tag = self.__find_element(self.driver, By.XPATH, '/html/body/main/div[4]/div/ul/li[1]/a', None, 10, 5, "a tag")
+      link_tag = self.__find_element(self.driver, By.XPATH, '/html/body/main/div[4]/div/ul/li[4]/a', None, 10, 5, "a tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      image_tag = self.__find_element(self.driver, By.XPATH, '/html/body/main/div[4]/div/ul/li[1]/a/div', None, 10, 5, "image tag")
+      image_tag = self.__find_element(self.driver, By.XPATH, '/html/body/main/div[4]/div/ul/li[4]/a/div', None, 10, 5, "image tag")
       image_link = image_tag.get_attribute("data-src")
       images.append(image_link)
     except TimeoutException as e:
@@ -82,7 +82,15 @@ class MugendaiYoshimotoScraper:
 
     try:
       text_tag = self.__find_element(self.driver, By.XPATH, '//*[@class="block-editor"]', None, 10, 5, "text tag")
-      texts = self.__extract_text(text_tag).strip()[:105] + "..."
+      p_elements = text_tag.find_elements(By.XPATH, ".//p")
+      texts = ""
+      for p_element in p_elements:
+        if len(p_element.text) > 50:
+          texts = p_element.text
+          break
+
+      if texts == "":
+        texts = text_tag.text
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
     
@@ -116,6 +124,16 @@ class MugendaiYoshimotoScraper:
 class LinkCannotProcessException(Exception):
   pass
 
+def extract_first_paragraph(text):
+  end_markers = ['。', '！', '？']  # Common sentence-ending markers in Japanese
+  
+  for marker in end_markers:
+    end_index = text.find(marker)
+    if end_index != -1:
+      return text[:end_index + len(marker)].strip()
+  
+  return text.strip()
+
 # if __name__ == '__main__':
 #   current_directory = "/Users/argiebacomo/Desktop/python_stuffs/scraper-server"
 #   info_logger = Logger('info', current_directory)
@@ -123,5 +141,6 @@ class LinkCannotProcessException(Exception):
 #   success_logger = Logger('success', current_directory)
 
 #   scraper = MugendaiYoshimotoScraper(failed_logger, success_logger, info_logger, False, False)
-#   print(scraper.start())
+#   xtractex = extract_first_paragraph(scraper.start()['data']['description'])
+#   print(xtractex)
 #   scraper.close()
