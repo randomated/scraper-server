@@ -60,12 +60,12 @@ class MugendaiYoshimotoScraper:
     self.driver.execute_script("window.scrollTo(0, 200);")
     images = []
     try:
-      link_tag = self.__find_element(self.driver, By.XPATH, '/html/body/main/div[4]/div/ul/li[4]/a', None, 10, 5, "a tag")
+      link_tag = self.__find_element(self.driver, By.XPATH, '/html/body/main/div[4]/div/ul/li[1]/a', None, 10, 5, "a tag")
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      image_tag = self.__find_element(self.driver, By.XPATH, '/html/body/main/div[4]/div/ul/li[4]/a/div', None, 10, 5, "image tag")
+      image_tag = self.__find_element(self.driver, By.XPATH, '/html/body/main/div[4]/div/ul/li[1]/a/div', None, 10, 5, "image tag")
       image_link = image_tag.get_attribute("data-src")
       images.append(image_link)
     except TimeoutException as e:
