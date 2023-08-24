@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.remote.webelement import WebElement
 import time
+# from logger import Logger
 
 class LoftScraper:
   def __init__(self, logger_exc, logger_nonexc, logger_forall, is_headless=True, is_chrome=True):
@@ -54,38 +55,39 @@ class LoftScraper:
     self.driver.quit()
 
   def __process(self):
+
     try:
       link_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="content-box"]/div/ul/li[1]/a', None, 10, 5, "a tag")
+      new_link = link_tag.get_attribute('href')
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
-    new_link = link_tag.get_attribute('href')
-    # self.driver.get(new_link)
-
-    # try:
-    #   time.sleep(5)
-    #   h1_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="wapper-innercontents"]/div/div[1]/div[1]/div', None, 10, 5, "h2 tag")
-    # except TimeoutException as e:
-    #   raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
+    try:
+      time.sleep(5)
+      h1_tag_1 = self.__find_element(self.driver, By.XPATH, '//*[@id="content-box"]/div/ul/li[1]/a/div/div/p[1]', None, 10, 5, "h2 tag 1")
+      h1_tag_2 = self.__find_element(self.driver, By.XPATH, '//*[@id="content-box"]/div/ul/li[1]/a/div/div/p[2]', None, 10, 5, "h2 tag 2")
+      h1_text = f"{h1_tag_1.text}\n{h1_tag_2.text}"
+    except TimeoutException as e:
+      raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
       image_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="content-box"]/div/ul/li[1]/a/div/p/img', None, 10, 5, "image tag")
+      image_link = image_tag.get_attribute('src')
+      images = []
+      images.append(image_link)
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
+
+    self.driver.get(new_link)
 
     try:
-      text_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="content-box"]/div/ul/li[1]/a/div/div/p[1]', None, 10, 5, "text tag")
+      text_tag = self.__find_element(self.driver, By.XPATH, '//*[@id="content-box"]/div', None, 10, 5, "text tag")
+      texts = self.__extract_text(text_tag).strip()
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
-
-    # h1_text = h1_tag.text
-    texts = self.__extract_text(text_tag).strip()
-    image_link = image_tag.get_attribute('src')
-
-    images = []
-    images.append(image_link)
     
-    return { "description": texts, "site_url": new_link, "images": images, "title": "ニュース　NEWS" }
+    return { "description": self.__limit_text(texts), "site_url": new_link, "images": images, "title": h1_text }
+
 
   def __find_element(self, driver, locator_type, locator, parent_element=None, timeout=10, max_tries=5, code_line=""):
     for i in range(max_tries):
@@ -112,14 +114,20 @@ class LoftScraper:
       text = text.replace(tag.get_attribute("textContent").strip(), "")
     return text
 
+  def __limit_text(self, text, max_length=105):
+    if len(text) > max_length:
+      return text[:max_length] + "..."
+    return text
+
 
 class LinkCannotProcessException(Exception):
   pass
 
 # if __name__ == '__main__':
-#   info_logger = Logger('info')
-#   failed_logger = Logger('failed')
-#   success_logger = Logger('success')
+#   current_directory = "/Users/argiebacomo/Desktop/python_stuffs/scraper-server"
+#   info_logger = Logger('info', current_directory)
+#   failed_logger = Logger('failed', current_directory)
+#   success_logger = Logger('success', current_directory)
 
 #   scraper = LoftScraper(failed_logger, success_logger, info_logger, False, False)
 #   print(scraper.start())
