@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.remote.webelement import WebElement
 import time
-# from logger import Logger
+from logger import Logger
 
 class LoftScraper:
   def __init__(self, logger_exc, logger_nonexc, logger_forall, is_headless=True, is_chrome=True):
@@ -66,7 +66,8 @@ class LoftScraper:
       time.sleep(5)
       h1_tag_1 = self.__find_element(self.driver, By.XPATH, '//*[@id="content-box"]/div/ul/li[1]/a/div/div/p[1]', None, 10, 5, "h2 tag 1")
       h1_tag_2 = self.__find_element(self.driver, By.XPATH, '//*[@id="content-box"]/div/ul/li[1]/a/div/div/p[2]', None, 10, 5, "h2 tag 2")
-      h1_text = f"{h1_tag_1.text}\n{h1_tag_2.text}"
+
+      h1_text = f"{self.__extract_text(h1_tag_1).strip()}\n{h1_tag_2.text}"
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
@@ -109,7 +110,7 @@ class LoftScraper:
   def __extract_text(self, element: WebElement) -> str:
     """Extracts the text from an element excluding <a> and <button> tags."""
     text = element.get_attribute("textContent").strip()
-    inner_tags = element.find_elements(By.XPATH, ".//a | .//button | .//img")
+    inner_tags = element.find_elements(By.XPATH, ".//a | .//button | .//img | .//span")
     for tag in inner_tags:
       text = text.replace(tag.get_attribute("textContent").strip(), "")
     return text
@@ -123,12 +124,12 @@ class LoftScraper:
 class LinkCannotProcessException(Exception):
   pass
 
-# if __name__ == '__main__':
-#   current_directory = "/Users/argiebacomo/Desktop/python_stuffs/scraper-server"
-#   info_logger = Logger('info', current_directory)
-#   failed_logger = Logger('failed', current_directory)
-#   success_logger = Logger('success', current_directory)
+if __name__ == '__main__':
+  current_directory = "/Users/argiebacomo/Desktop/python_stuffs/scraper-server"
+  info_logger = Logger('info', current_directory)
+  failed_logger = Logger('failed', current_directory)
+  success_logger = Logger('success', current_directory)
 
-#   scraper = LoftScraper(failed_logger, success_logger, info_logger, False, False)
-#   print(scraper.start())
-#   scraper.close()
+  scraper = LoftScraper(failed_logger, success_logger, info_logger, False, False)
+  print(scraper.start())
+  scraper.close()
