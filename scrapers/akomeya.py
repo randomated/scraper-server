@@ -57,20 +57,20 @@ class AkomeyaScraper:
   def __process(self):
     time.sleep(10)
     try:
-      link_tag = self.__find_element(self.driver, By.XPATH, '/html/body/div[1]/div[3]/div/main/div[1]/div[2]/dl[1]/dt/a', None, 10, 5, "a tag")
+      link_tag = self.__find_element(self.driver, By.XPATH, '/html/body/div[1]/div[3]/div/main/div[1]/div[2]/dl[2]/dt/a', None, 10, 5, "a tag")
       new_link = link_tag.get_attribute('href')
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
       time.sleep(5)
-      h1_tag = self.__find_element(self.driver, By.XPATH, '/html/body/div[1]/div[3]/div/main/div[1]/div[2]/dl[1]/dd[2]/a', None, 10, 5, "h2 tag")
+      h1_tag = self.__find_element(self.driver, By.XPATH, '/html/body/div[1]/div[3]/div/main/div[1]/div[2]/dl[2]/dd[2]/a', None, 10, 5, "h2 tag")
       h1_text = h1_tag.text
     except TimeoutException as e:
       raise LinkCannotProcessException(f"Cannot find element error: {e.msg}")
 
     try:
-      image_tag = self.__find_element(self.driver, By.XPATH, '/html/body/div[1]/div[3]/div/main/div[1]/div[2]/dl[1]/dt/a/figure/img', None, 10, 5, "image tag")
+      image_tag = self.__find_element(self.driver, By.XPATH, '/html/body/div[1]/div[3]/div/main/div[1]/div[2]/dl[2]/dt/a/figure/img', None, 10, 5, "image tag")
       image_link = image_tag.get_attribute('src')
       images = []
       images.append(image_link)
