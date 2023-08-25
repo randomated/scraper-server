@@ -81,39 +81,18 @@ saver = Saver(current_directory)
 scrape_list = { 
   "scrape_list": [
     {
-      'type': 'mysweets',
-      'stores': [
+      "stores": [
+        {"store_name": "コスメロフト東急プラザ表参道原宿店", "wls_id": 208},
+        {"store_name": "渋谷ロフト", "wls_id": 207}
+      ],  
+      "type": "loft"
+    },
+    {
+      "type": "akomeya",
+      "stores": [
         {
-          "store_name": "MY SWEETS 渋谷店",
-          "wls_id": "712"
-        },
-        {
-          "store_name": "MY SWEETS 東急プラザ蒲田店",
-          "wls_id": "713"
-        },
-        {
-          "store_name": "MY SWEETS エトモ武蔵小山店",
-          "wls_id": "714"
-        },
-        {
-          "store_name": "MY SWEETS エトモ長津田店",
-          "wls_id": "715"
-        },
-        {
-          "store_name": "MY SWEETS エトモ大井町店",
-          "wls_id": "716"
-        },
-        {
-          "store_name": "MY SWEETS エトモ市ヶ尾店",
-          "wls_id": "717"
-        },
-        {
-          "store_name": "MY SWEETS エトモ中央林間店",
-          "wls_id": "718"
-        },
-        {
-          "store_name": "MY SWEETS 二子玉川店",
-          "wls_id": "719"
+          "store_name": "AKOMEYA TOKYO 東急プラザ渋谷",
+          "wls_id": "218"
         }
       ]
     }
@@ -191,8 +170,8 @@ class_mapping = {
   'momastore': MomastoreScraper,
 }
 
-will_hide = True
-is_chrome = True
+will_hide = False
+is_chrome = False
 
 
 def create_record(title, description, site_url, images, store_name, wls_id):
