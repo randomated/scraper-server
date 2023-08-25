@@ -170,8 +170,8 @@ class_mapping = {
   'momastore': MomastoreScraper,
 }
 
-will_hide = False
-is_chrome = False
+will_hide = True
+is_chrome = True
 
 
 def create_record(title, description, site_url, images, store_name, wls_id):
