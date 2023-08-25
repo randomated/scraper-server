@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.remote.webelement import WebElement
 import time
-from logger import Logger
+# from logger import Logger
 
 class LoftScraper:
   def __init__(self, logger_exc, logger_nonexc, logger_forall, is_headless=True, is_chrome=True):
@@ -124,12 +124,12 @@ class LoftScraper:
 class LinkCannotProcessException(Exception):
   pass
 
-if __name__ == '__main__':
-  current_directory = "/Users/argiebacomo/Desktop/python_stuffs/scraper-server"
-  info_logger = Logger('info', current_directory)
-  failed_logger = Logger('failed', current_directory)
-  success_logger = Logger('success', current_directory)
+# if __name__ == '__main__':
+#   current_directory = "/Users/argiebacomo/Desktop/python_stuffs/scraper-server"
+#   info_logger = Logger('info', current_directory)
+#   failed_logger = Logger('failed', current_directory)
+#   success_logger = Logger('success', current_directory)
 
-  scraper = LoftScraper(failed_logger, success_logger, info_logger, False, False)
-  print(scraper.start())
-  scraper.close()
+#   scraper = LoftScraper(failed_logger, success_logger, info_logger, False, False)
+#   print(scraper.start())
+#   scraper.close()
