@@ -79,7 +79,7 @@ class ThreecosmeticsScraper:
     images = []
     images.append(image_link)
     
-    return { "description": texts, "site_url": new_link, "images": images, "title": "NEWS" }
+    return { "description": texts, "site_url": new_link, "images": images, "title": "" }
 
   def __find_element(self, driver, locator_type, locator, parent_element=None, timeout=10, max_tries=5, code_line=""):
     for i in range(max_tries):
