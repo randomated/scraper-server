@@ -64,7 +64,7 @@ from scrapers.mysweets import MySweetsScraper
 from scrapers.tullys import TullyScraper
 from scrapers.dipunto import DiPuntoScraper
 from scrapers.pronto import ProntoScraper
-from scrapers.shibuya_scramble import ShibuyaScrambleScraper
+from scrapers.shibuya_scramble_two import ShibuyaScrambleScraper
 from scrapers.donki import DonkiScraper
 from scrapers.momastore import MomastoreScraper
 import os
@@ -1108,15 +1108,7 @@ for item in scrape_list["scrape_list"]:
 
     data = result['data']
 
-    if item['type'] != 'mysweets':
-      contains_data_image = any("data:image" in image_link for image_link in data['images'])
-
-      if not contains_data_image:
-        inserted_id = saver.add_scraped_data(data['title'], data['description'], data['site_url'], data['images'])
-
-        for store in item["stores"]:
-          saver.add_store(inserted_id, store['store_name'], store['wls_id'])
-    else:
+    if item['type'] == 'mysweets':
       for res in data:
         contains_data_image = any("data:image" in image_link for image_link in res['images'])
         if not contains_data_image:
@@ -1136,6 +1128,21 @@ for item in scrape_list["scrape_list"]:
             create_record(res['title'], res['description'], res['site_url'], res['images'], "MY SWEETS エトモ中央林間店", 718)
           if "二子玉川店" in res['title']:
             create_record(res['title'], res['description'], res['site_url'], res['images'], "MY SWEETS 二子玉川店", 719)
+    elif item['type'] == 'shibuya_scramble':
+      for res in data:
+        contains_data_image = any("data:image" in image_link for image_link in res['images'])
+        inserted_id = saver.add_scraped_data(res['title'], res['description'], res['site_url'], res['images'], res['start_date'], res['end_date'])
+        for store in item["stores"]:
+          saver.add_store(inserted_id, store['store_name'], store['wls_id'])
+    else:
+      contains_data_image = any("data:image" in image_link for image_link in data['images'])
+
+      if not contains_data_image:
+        inserted_id = saver.add_scraped_data(data['title'], data['description'], data['site_url'], data['images'])
+
+        for store in item["stores"]:
+          saver.add_store(inserted_id, store['store_name'], store['wls_id'])
+
   else:
     summary_logger.log(f"{item['type']} FAILED")
 

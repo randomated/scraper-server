@@ -64,7 +64,7 @@ from scrapers.mysweets import MySweetsScraper
 from scrapers.tullys import TullyScraper
 from scrapers.dipunto import DiPuntoScraper
 from scrapers.pronto import ProntoScraper
-from scrapers.shibuya_scramble import ShibuyaScrambleScraper
+from scrapers.shibuya_scramble_two import ShibuyaScrambleScraper
 from scrapers.donki import DonkiScraper
 from scrapers.momastore import MomastoreScraper
 import os
@@ -81,18 +81,57 @@ saver = Saver(current_directory)
 scrape_list = { 
   "scrape_list": [
     {
-      "stores": [
-        {"store_name": "コスメロフト東急プラザ表参道原宿店", "wls_id": 208},
-        {"store_name": "渋谷ロフト", "wls_id": 207}
-      ],  
-      "type": "loft"
+      'type': 'shibuya_scramble',
+      'stores': [
+        {
+          "store_name": "渋谷スクランブルスクエア",
+          "wls_id": "710"
+        }
+      ]
     },
     {
-      "type": "akomeya",
-      "stores": [
+      'type': 'momastore',
+      'stores': [
         {
-          "store_name": "AKOMEYA TOKYO 東急プラザ渋谷",
-          "wls_id": "218"
+          "store_name": "MoMADesignStore表参道",
+          "wls_id": "209"
+        }
+      ]
+    },
+    {
+      'type': 'mysweets',
+      'stores': [
+        {
+          "store_name": "MY SWEETS 渋谷店",
+          "wls_id": "712"
+        },
+        {
+          "store_name": "MY SWEETS 東急プラザ蒲田店",
+          "wls_id": "713"
+        },
+        {
+          "store_name": "MY SWEETS エトモ武蔵小山店",
+          "wls_id": "714"
+        },
+        {
+          "store_name": "MY SWEETS エトモ長津田店",
+          "wls_id": "715"
+        },
+        {
+          "store_name": "MY SWEETS エトモ大井町店",
+          "wls_id": "716"
+        },
+        {
+          "store_name": "MY SWEETS エトモ市ヶ尾店",
+          "wls_id": "717"
+        },
+        {
+          "store_name": "MY SWEETS エトモ中央林間店",
+          "wls_id": "718"
+        },
+        {
+          "store_name": "MY SWEETS 二子玉川店",
+          "wls_id": "719"
         }
       ]
     }
@@ -171,7 +210,7 @@ class_mapping = {
 }
 
 will_hide = True
-is_chrome = True
+is_chrome = False
 
 
 def create_record(title, description, site_url, images, store_name, wls_id):
@@ -189,15 +228,7 @@ for item in scrape_list["scrape_list"]:
 
     data = result['data']
 
-    if item['type'] != 'mysweets':
-      contains_data_image = any("data:image" in image_link for image_link in data['images'])
-
-      if not contains_data_image:
-        inserted_id = saver.add_scraped_data(data['title'], data['description'], data['site_url'], data['images'])
-
-        for store in item["stores"]:
-          saver.add_store(inserted_id, store['store_name'], store['wls_id'])
-    else:
+    if item['type'] == 'mysweets':
       for res in data:
         contains_data_image = any("data:image" in image_link for image_link in res['images'])
         if not contains_data_image:
@@ -217,9 +248,23 @@ for item in scrape_list["scrape_list"]:
             create_record(res['title'], res['description'], res['site_url'], res['images'], "MY SWEETS エトモ中央林間店", 718)
           if "二子玉川店" in res['title']:
             create_record(res['title'], res['description'], res['site_url'], res['images'], "MY SWEETS 二子玉川店", 719)
+    elif item['type'] == 'shibuya_scramble':
+      for res in data:
+        contains_data_image = any("data:image" in image_link for image_link in res['images'])
+        inserted_id = saver.add_scraped_data(res['title'], res['description'], res['site_url'], res['images'], res['start_date'], res['end_date'])
+        for store in item["stores"]:
+          saver.add_store(inserted_id, store['store_name'], store['wls_id'])
+    else:
+      contains_data_image = any("data:image" in image_link for image_link in data['images'])
+
+      if not contains_data_image:
+        inserted_id = saver.add_scraped_data(data['title'], data['description'], data['site_url'], data['images'])
+
+        for store in item["stores"]:
+          saver.add_store(inserted_id, store['store_name'], store['wls_id'])
+
   else:
     summary_logger.log(f"{item['type']} FAILED")
 
 saver.close_db()
-
 

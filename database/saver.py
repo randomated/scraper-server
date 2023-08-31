@@ -18,7 +18,9 @@ class Saver:
         (id INTEGER PRIMARY KEY, 
         title TEXT, 
         body TEXT,
-        link TEXT)''')
+        link TEXT,
+        start_date TEXT NULL,
+        end_date TEXT NULL)''')
 
       self.__conn.execute('''CREATE TABLE image_links
         (id INTEGER PRIMARY KEY,
@@ -35,9 +37,9 @@ class Saver:
     else:
       self.__conn = sqlite3.connect(self.__db_file)
 
-  def add_scraped_data(self, title, body, link, image_links):
+  def add_scraped_data(self, title, body, link, image_links, start_date=None, end_date=None):
     cursor = self.__conn.cursor()
-    cursor.execute('INSERT INTO scraped_datas (title, body, link) VALUES (?, ?, ?)', (title, body, link))
+    cursor.execute('INSERT INTO scraped_datas (title, body, link, start_date, end_date) VALUES (?, ?, ?, ?, ?)', (title, body, link, start_date, end_date))
     inserted_id = cursor.lastrowid
 
     cursor.executemany('INSERT INTO image_links (scraped_data_id, image_link) VALUES (?, ?)', [(inserted_id, link) for link in image_links])
@@ -61,7 +63,7 @@ class Saver:
     scraped_datas = scraped_data_cursor.fetchall()
 
     for index, scraped_data in enumerate(scraped_datas):
-      result.append({ "title": scraped_data[1], "body": scraped_data[2], "link": scraped_data[3], "images": [], "stores": [] })
+      result.append({ "title": scraped_data[1], "body": scraped_data[2], "link": scraped_data[3], "start_date": scraped_data[4], "end_date": scraped_data[5], "images": [], "stores": [] })
 
       image_link_cursor = self.__conn.cursor()
       image_link_cursor.execute('SELECT * FROM image_links WHERE scraped_data_id = ?;', (scraped_data[0],))
