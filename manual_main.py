@@ -164,7 +164,7 @@ class_mapping = {
 }
 
 will_hide = True
-is_chrome = False
+is_chrome = True
 
 
 def create_record(title, description, site_url, images, store_name, wls_id):
