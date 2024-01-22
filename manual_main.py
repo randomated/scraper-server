@@ -81,11 +81,11 @@ saver = Saver(current_directory)
 scrape_list = { 
   "scrape_list": [
     {
-      "type": "akomeya",
-      "stores": [
+      'type': 'shibuya_scramble',
+      'stores': [
         {
-          "store_name": "AKOMEYA TOKYO 東急プラザ渋谷",
-          "wls_id": "218"
+          "store_name": "渋谷スクランブルスクエア",
+          "wls_id": "710"
         }
       ]
     }
