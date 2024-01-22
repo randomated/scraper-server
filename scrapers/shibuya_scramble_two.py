@@ -9,7 +9,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.remote.webelement import WebElement
 from datetime import datetime
 import time
-from logger import Logger
+# from logger import Logger
 
 class ShibuyaScrambleScraper:
   def __init__(self, logger_exc, logger_nonexc, logger_forall, is_headless=True, is_chrome=True):
@@ -207,12 +207,12 @@ class ShibuyaScrambleScraper:
 class LinkCannotProcessException(Exception):
   pass
 
-if __name__ == '__main__':
-  current_directory = "/Users/argiebacomo/Desktop/python_stuffs/scraper-server"
-  info_logger = Logger('info', current_directory)
-  failed_logger = Logger('failed', current_directory)
-  success_logger = Logger('success', current_directory)
+# if __name__ == '__main__':
+#   current_directory = "/Users/argiebacomo/Desktop/python_stuffs/scraper-server"
+#   info_logger = Logger('info', current_directory)
+#   failed_logger = Logger('failed', current_directory)
+#   success_logger = Logger('success', current_directory)
 
-  scraper = ShibuyaScrambleScraper(failed_logger, success_logger, info_logger, False, False)
-  print(scraper.start())
-  scraper.close()
+#   scraper = ShibuyaScrambleScraper(failed_logger, success_logger, info_logger, False, False)
+#   print(scraper.start())
+#   scraper.close()
