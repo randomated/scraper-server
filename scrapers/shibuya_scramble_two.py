@@ -9,7 +9,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.remote.webelement import WebElement
 from datetime import datetime
 import time
-# from logger import Logger
+from logger import Logger
 
 class ShibuyaScrambleScraper:
   def __init__(self, logger_exc, logger_nonexc, logger_forall, is_headless=True, is_chrome=True):
@@ -170,12 +170,24 @@ class ShibuyaScrambleScraper:
 
       start_part = parts[0].strip()
       start_month, start_day = start_part.split('月')
+
+      if "年" in start_month:
+        start_year, start_month = start_month.split('年')
+
       start_month_num = month_mapping[f"{start_month}月"]
+      
       start_date = datetime(today_year, start_month_num, int(start_day.split("日")[0]))
 
       if len(parts) > 1:
         if "月" in parts[1].strip():
           end_part = parts[1].strip()
+
+          if "(" in end_part:
+            end_part = end_part.split('(')[0]
+
+          if "（" in end_part:
+            end_part = end_part.split('（')[0]
+
           end_month, end_day = end_part.split('月')
           end_month_num = month_mapping[f"{end_month}月"]
           end_date = datetime(today_year, end_month_num, int(end_day.split("日")[0]))
@@ -195,12 +207,12 @@ class ShibuyaScrambleScraper:
 class LinkCannotProcessException(Exception):
   pass
 
-# if __name__ == '__main__':
-#   current_directory = "/Users/argiebacomo/Desktop/python_stuffs/scraper-server"
-#   info_logger = Logger('info', current_directory)
-#   failed_logger = Logger('failed', current_directory)
-#   success_logger = Logger('success', current_directory)
+if __name__ == '__main__':
+  current_directory = "/Users/argiebacomo/Desktop/python_stuffs/scraper-server"
+  info_logger = Logger('info', current_directory)
+  failed_logger = Logger('failed', current_directory)
+  success_logger = Logger('success', current_directory)
 
-#   scraper = ShibuyaScrambleScraper(failed_logger, success_logger, info_logger, False, False)
-#   print(scraper.start())
-#   scraper.close()
+  scraper = ShibuyaScrambleScraper(failed_logger, success_logger, info_logger, False, False)
+  print(scraper.start())
+  scraper.close()
