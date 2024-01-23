@@ -28,7 +28,7 @@ class BaycrewsScraper:
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
       
-      self.driver = webdriver.Chrome(options=options)
+      self.driver = webdriver.Chrome(options=options, service=ChromeService(ChromeDriverManager().install()))
     else:
       options = FirefoxOptions()
       options.add_argument('-private')
