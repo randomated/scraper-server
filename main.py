@@ -151,31 +151,6 @@ scrape_list = {
       "type": "shiro"
     },
     {
-      "stores": [
-        {
-          "store_name": "カフェ・ド・クリエ グラン 恵比寿ガーデンプレイス店",
-          "wls_id": "607"
-        },
-        {
-          "store_name": "カフェ・ド・クリエ グラン　渋谷桜丘スクエア店",
-          "wls_id": "606"
-        },
-        {
-          "store_name": "カフェ・ド・クリエ 代々木東口店",
-          "wls_id": "605"
-        },
-        {
-          "store_name": "カフェ・ド・クリエ 南新宿店",
-          "wls_id": "604"
-        },
-        {
-          "store_name": "カフェ・ド・クリエ 渋谷3丁目店",
-          "wls_id": "603"
-        }
-      ],
-      "type": "pokkacreate"
-    },
-    {
       "type": "natural_lawson",
       "stores": [
         {
