@@ -12,7 +12,7 @@ class CustomJSONEncoder(json.JSONEncoder):
       return obj.encode('utf-8').decode('unicode-escape')
     return super().default(obj)
 
-@app.route('/')
+@app.route('/api/v1/scraper/server')
 def index():
   saver = Saver(current_directory)
   data = saver.fetch_datas()
@@ -25,4 +25,4 @@ def index():
 
 if __name__ == '__main__':
   app.json_provider_class = CustomJSONEncoder
-  app.run(host='0.0.0.0', port=3000)
+  app.run(host='0.0.0.0', port=4000)
