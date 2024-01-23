@@ -6,6 +6,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
+
 import re
 import time
 
@@ -25,7 +28,7 @@ class InSeaScraper:
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
       
-      self.driver = webdriver.Chrome(options=options)
+      self.driver = webdriver.Chrome(options=options, service=ChromeService(ChromeDriverManager().install()))
     else:
       options = FirefoxOptions()
       options.add_argument('-private')
