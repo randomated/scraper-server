@@ -68,6 +68,7 @@ from scrapers.shibuya_scramble_two import ShibuyaScrambleScraper
 from scrapers.donki import DonkiScraper
 from scrapers.momastore import MomastoreScraper
 import os
+import json
 
 current_directory = os.path.dirname(os.path.realpath(__file__))
 
@@ -163,8 +164,8 @@ class_mapping = {
   'momastore': MomastoreScraper,
 }
 
-will_hide = True
-is_chrome = True
+will_hide = False
+is_chrome = False
 
 
 def create_record(title, description, site_url, images, store_name, wls_id):
@@ -203,7 +204,9 @@ for item in scrape_list["scrape_list"]:
           if "二子玉川店" in res['title']:
             create_record(res['title'], res['description'], res['site_url'], res['images'], "MY SWEETS 二子玉川店", 719)
     elif item['type'] == 'shibuya_scramble':
-      for res in data:
+      reversed_data = data[::-1]
+
+      for res in reversed_data:
         contains_data_image = any("data:image" in image_link for image_link in res['images'])
         inserted_id = saver.add_scraped_data(res['title'], res['description'], res['site_url'], res['images'], res['start_date'], res['end_date'])
         for store in item["stores"]:
@@ -221,4 +224,5 @@ for item in scrape_list["scrape_list"]:
     summary_logger.log(f"{item['type']} FAILED")
 
 saver.close_db()
+
 

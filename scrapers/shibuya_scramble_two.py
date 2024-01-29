@@ -181,29 +181,29 @@ class ShibuyaScrambleScraper:
       
       start_date = datetime(today_year, start_month_num, int(start_day.split("日")[0]))
 
-      if len(parts) > 1:
-        if "月" in parts[1].strip():
-          end_part = parts[1].strip()
+      # if len(parts) > 1:
+      #   if "月" in parts[1].strip():
+      #     end_part = parts[1].strip()
 
-          if "(" in end_part:
-            end_part = end_part.split('(')[0]
+      #     if "(" in end_part:
+      #       end_part = end_part.split('(')[0]
 
-          if "（" in end_part:
-            end_part = end_part.split('（')[0]
+      #     if "（" in end_part:
+      #       end_part = end_part.split('（')[0]
 
-          end_month, end_day = end_part.split('月')
-          end_month_num = month_mapping[f"{end_month}月"]
-          end_date = datetime(today_year, end_month_num, int(end_day.split("日")[0]))
-        else:
-          if parts[1].strip() != '':
-            end_part = parts[1].strip()
-            end_date = datetime(today_year, start_month_num, int(end_part.split("日")[0]))
-          else:
-            return start_date.strftime('%B %d, %Y'), datetime(2999, 12, 31).strftime('%B %d, %Y')
-        return start_date.strftime('%B %d, %Y'), end_date.strftime('%B %d, %Y')
+      #     end_month, end_day = end_part.split('月')
+      #     end_month_num = month_mapping[f"{end_month}月"]
+      #     end_date = datetime(today_year, end_month_num, int(end_day.split("日")[0]))
+      #   else:
+      #     if parts[1].strip() != '':
+      #       end_part = parts[1].strip()
+      #       end_date = datetime(today_year, start_month_num, int(end_part.split("日")[0]))
+      #     else:
+      #       return start_date.strftime('%B %d, %Y'), datetime(2999, 12, 31).strftime('%B %d, %Y')
+      #   return start_date.strftime('%B %d, %Y'), end_date.strftime('%B %d, %Y')
 
-      else:
-        return start_date.strftime('%B %d, %Y'), datetime(2999, 12, 31).strftime('%B %d, %Y')
+      # else:
+      return start_date.strftime('%B %d, %Y'), datetime(2999, 12, 31).strftime('%B %d, %Y')
     else:
       return None, None
 
