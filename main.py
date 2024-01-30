@@ -599,15 +599,6 @@ scrape_list = {
     {
       "stores": [
         {
-          "store_name": "ファイテンショップ 渋谷東口店",
-          "wls_id": "199"
-        }
-      ],
-      'type': 'phiten'
-    },
-    {
-      "stores": [
-        {
           "store_name": "福笑（ふくわらい）",
           "wls_id": "366"
         }
